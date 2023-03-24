@@ -1,4 +1,4 @@
-import { OfferCards } from '../types/types';
+import { OfferCards } from '../types/offer-type';
 
 export const offers: OfferCards = [
   {
