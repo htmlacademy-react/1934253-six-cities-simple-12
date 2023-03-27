@@ -1,3 +1,4 @@
+import ReviewForm from '../../components/rewiev/rewiev';
 const OfferScreen = (): JSX.Element =>
   (
     <main className="page__main page__main--property">
@@ -139,6 +140,7 @@ const OfferScreen = (): JSX.Element =>
                   </div>
                 </li>
               </ul>
+              <ReviewForm />
             </section>
           </div>
         </div>
