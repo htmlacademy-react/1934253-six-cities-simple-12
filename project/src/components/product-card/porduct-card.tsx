@@ -1,25 +1,30 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import { useState } from 'react';
+import { Link, useLocation } from 'react-router-dom';
 import { OfferCard } from '../../types/offer-type';
 import { MAX_RATING } from '../../const';
 
-
 type CardProps = {
-  offers: OfferCard;
+  offer: OfferCard;
+  onCardHover: (ActiveCard: number) => void;
 }
 
-const ProductCard = ({ offers }: CardProps) => {
-  const { id, isPremium, previewImage, price, rating, title, type } = offers;
+const ProductCard = ({ offer, onCardHover }: CardProps) => {
+  const { id, isPremium, previewImage, price, rating, title, type } = offer;
   const ratingWidth = Math.round(rating / MAX_RATING) * 100;
   const premiumCheck = (isPremium) ? <div className="place-card__mark"><span>Premium</span></div> : null;
-
+  const cardHoverHandler = () => onCardHover(offer.id);
+  const location = useLocation ();
   return (
-    <article className="cities__card place-card">
+    <article
+      className="cities__card place-card"
+      key={offer.id}
+      onMouseEnter = {cardHoverHandler}
+    >
       {premiumCheck}
       <div className="cities__image-wrapper place-card__image-wrapper">
-        <a href="#">
+        <Link to = {`/offer/${id}`}>
           <img className="place-card__image" src={previewImage} width="260" height="200" alt="Place image" />
-        </a>
+        </Link>
       </div>
       <div className="place-card__info">
         <div className="place-card__price-wrapper">
@@ -36,7 +41,7 @@ const ProductCard = ({ offers }: CardProps) => {
           </div>
         </div>
         <h2 className="place-card__name">
-          <a href="#">{title}</a>
+          <Link to = {`/offer/${id}`}>{title}</Link>
         </h2>
         <p className="place-card__type">{type}</p>
       </div>

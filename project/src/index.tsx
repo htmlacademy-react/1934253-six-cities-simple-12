@@ -1,7 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import App from './components/app/app';
-import { offers } from './mocks/offers';
+import { offers } from './mock/offers';
+import { reviews } from './mock/review';
 
 const Setting = {
   CountRooms: 312,
@@ -17,6 +18,7 @@ root.render(
     <App
       countRooms = {Setting.CountRooms}
       offers = {offers}
+      reviews = {reviews}
     />
   </React.StrictMode>,
 );
