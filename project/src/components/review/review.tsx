@@ -1,14 +1,23 @@
 import { ChangeEvent, Fragment, useState } from 'react';
 import { RatingRewiev } from '../../const';
 
+const MIN_LENGTH_COMMENT = 50;
+const MAX_LENGTH_COMMENT = 300;
+
 const ReviewForm = () => {
-  const [stateInput, setStateInput] = useState({
+  const [formData, setFormData] = useState({
     review: '',
     rating: 0
   });
   const inputChange = (event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const {name, value} = event.target;
-    setStateInput({...stateInput, [name]: value});
+    setFormData({...formData, [name]: value});
+  };
+
+  const isValidForm = () => {
+    const isMinLength = (MIN_LENGTH_COMMENT <= formData.review.length && MAX_LENGTH_COMMENT >= formData.review.length);
+    const isRated = formData.rating > 0;
+    return isMinLength && isRated;
   };
 
   return (
@@ -42,14 +51,14 @@ const ReviewForm = () => {
         id="review"
         name="review"
         placeholder="Tell how was your stay, what you like and what can be improved"
-        value = {stateInput.review}
+        value = {formData.review}
         onChange = {inputChange}
       />
       <div className="reviews__button-wrapper">
         <p className="reviews__help">
                         To submit review please make sure to set <span className="reviews__star">rating</span> and describe your stay with at least <b className="reviews__text-amount">50 characters</b>.
         </p>
-        <button className="reviews__submit form__submit button" type="submit" disabled>Submit</button>
+        <button className="reviews__submit form__submit button" type="submit" disabled = {!isValidForm()}>Submit</button>
       </div>
     </form>
   );

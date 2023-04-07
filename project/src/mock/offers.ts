@@ -78,8 +78,8 @@ export const offers: OfferCards = [
     city: {
       name: 'Amsterdam',
       location: {
-        latitude: 50.938361,
-        longitude: 6.959974,
+        latitude: 52.371,
+        longitude: 4.894,
         zoom: 13
       }
     },
@@ -121,8 +121,8 @@ export const offers: OfferCards = [
     city: {
       name: 'Amsterdam',
       location: {
-        latitude: 50.938361,
-        longitude: 6.959974,
+        latitude: 52.371,
+        longitude: 4.894,
         zoom: 13,
       }
     },
@@ -171,8 +171,8 @@ export const offers: OfferCards = [
     city: {
       name: 'Amsterdam',
       location: {
-        latitude: 50.938361,
-        longitude: 6.959974,
+        latitude: 52.371,
+        longitude: 4.894,
         zoom: 13,
       }
     },

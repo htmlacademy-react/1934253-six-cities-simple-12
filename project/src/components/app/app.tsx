@@ -23,7 +23,7 @@ function App({countRooms, offers, reviews}: MainPageProps): JSX.Element {
         <Route path={AppRoute.Main} element = {<Layout />}>
           <Route index element = {<MainPages countRooms={countRooms} offers={offers} />} />
           <Route path={AppRoute.Login} element = {<LoginPage />} />
-          <Route path={AppRoute.Offer} element = {<OfferScreen reviews = { reviews } />} />
+          <Route path={AppRoute.Offer} element = {<OfferScreen reviews = { reviews } offers = {offers} />} />
         </Route>
         <Route path='*' element={<ErrorPage/>} />
       </Routes>
