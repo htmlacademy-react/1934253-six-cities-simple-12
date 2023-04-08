@@ -13,25 +13,26 @@ export type OfferCard = {
   description: string;
   city: City;
   location: Location;
-  host: Person;
-}
+  host: Host;
+};
 
-type Person = {
-  id: number;
-  avatarUrl: string;
-  isPro: boolean;
+export type City ={
   name: string;
+  location: Location;
 }
 
-type Location = {
+export type Location = {
   latitude: number;
   longitude: number;
   zoom: number;
 }
 
-type City = {
-  location: Location;
+type Host = {
+  id: number;
   name: string;
+  isPro: boolean;
+  avatarUrl: string;
 }
 
 export type OfferCards = OfferCard[];
+

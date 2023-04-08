@@ -1,16 +1,27 @@
-import ProductCard from '../product-card/porduct-card';
-import { OfferCards } from '../../types/offer-type';
-// import { useState } from 'react';
-// import { type } from 'os';
+import ProductCard from '../product-card/product-card';
+import { OfferCards } from '../../types/offers';
+import { classNames } from '../../const';
 
 type ProductListProps = {
   offers: OfferCards;
+  onCardHover: (ActiveCard: number) => void;
+  className: string;
 }
 
-const ProductList = ({offers}: ProductListProps) => (
-  <div className="cities__places-list places__list tabs__content">
-    {offers.map((offer) => <ProductCard key={offer.id} offers={offer} />)}
-  </div>
-);
+const ProductList = ({offers, onCardHover, className}: ProductListProps) => {
+  if (className === classNames.MainPageProductList) {
+    return (
+      <div className={className}>
+        {offers.map((offer) => <ProductCard key={offer.id} offer={offer} onCardHover={onCardHover} />)}
+      </div>
+    );
+  }
+  return (
+    <div className={className}>
+      {offers.slice(1,4).map((offer) => <ProductCard key={offer.id} offer={offer} onCardHover={onCardHover} />)}
+    </div>
+  );
+
+};
 
 export default ProductList;
