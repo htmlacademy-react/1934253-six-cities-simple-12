@@ -1,10 +1,12 @@
-import ProductCard from '../../components/product-card/porduct-card';
+import { OfferCards } from '../../types/offer-type';
+import ProductList from '../../components/product-list/product-list';
 
 type MainPageProps = {
   countRooms: number;
+  offers: OfferCards;
 }
 
-const MainPages = ({ countRooms }: MainPageProps): JSX.Element =>
+const MainPages = ({ countRooms, offers }: MainPageProps): JSX.Element =>
   (
     <main className="page__main page__main--index">
       <h1 className="visually-hidden">Cities</h1>
@@ -65,11 +67,7 @@ const MainPages = ({ countRooms }: MainPageProps): JSX.Element =>
               </ul>
             </form>
             <div className="cities__places-list places__list tabs__content">
-              <ProductCard />
-              <ProductCard />
-              <ProductCard />
-              <ProductCard />
-              <ProductCard />
+              <ProductList offers={offers}/>
             </div>
           </section>
           <div className="cities__right-section">
