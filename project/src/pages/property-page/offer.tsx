@@ -4,7 +4,6 @@ import { OfferCards } from '../../types/offers';
 import { ReviewOfferCards } from '../../types/review';
 import { classNames } from '../../const';
 import { useState } from 'react';
-// import { useLocation } from 'react-router-dom';
 import Map from '../../components/map/map';
 
 type OfferScreenProps = {

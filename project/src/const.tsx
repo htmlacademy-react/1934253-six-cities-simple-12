@@ -3,7 +3,6 @@ export enum AppRoute {
   Main = '/',
   Offer = '/offer/:id'
 }
-
 export const MAX_RATING = 5;
 
 export const RatingRewiev = [
