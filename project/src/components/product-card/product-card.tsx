@@ -1,38 +1,27 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
-import { ChangeEvent, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { OfferCard } from '../../types/offer-type';
+import { OfferCard } from '../../types/offers';
 import { MAX_RATING } from '../../const';
 
-
 type CardProps = {
-  offers: OfferCard;
+  offer: OfferCard;
+  onCardHover: (ActiveCard: number) => void;
 }
 
-type CardActiveType = {
-  id: number | null;
-};
-
-const ProductCard = ({ offers }: CardProps) => {
-  const [state, setState] = useState<CardActiveType>({id:null});
-
-  const focusActiveCard = (id: number) => {
-    setState({id: id});
-  };
-
-  const { id, isPremium, previewImage, price, rating, title, type } = offers;
+const ProductCard = ({ offer, onCardHover }: CardProps) => {
+  const { id, isPremium, previewImage, price, rating, title, type } = offer;
   const ratingWidth = Math.round(rating / MAX_RATING) * 100;
-  const premiumCheck = (isPremium) ? <div className="place-card__mark"><span>Premium</span></div> : null;
-
+  const premium = isPremium ? <div className="place-card__mark"><span>Premium</span></div> : null;
+  const cardHoverHandler = () => onCardHover(offer.id);
   return (
     <article
       className="cities__card place-card"
-      onMouseEnter={() => focusActiveCard(offers.id)}
+      key={offer.id}
+      onMouseEnter = {cardHoverHandler}
     >
-      {premiumCheck}
+      {premium}
       <div className="cities__image-wrapper place-card__image-wrapper">
         <Link to = {`/offer/${id}`}>
-          <img className="place-card__image" src={previewImage} width="260" height="200" alt="Place image" />
+          <img className="place-card__image" src={previewImage} width="260" height="200" alt="Place" />
         </Link>
       </div>
       <div className="place-card__info">
@@ -41,7 +30,6 @@ const ProductCard = ({ offers }: CardProps) => {
             <b className="place-card__price-value">&euro;{price}</b>
             <span className="place-card__price-text">&#47;&nbsp;night</span>
           </div>
-
         </div>
         <div className="place-card__rating rating">
           <div className="place-card__stars rating__stars">

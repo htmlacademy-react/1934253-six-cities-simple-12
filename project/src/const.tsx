@@ -3,14 +3,7 @@ export enum AppRoute {
   Main = '/',
   Offer = '/offer/:id'
 }
-
 export const MAX_RATING = 5;
-
-export enum AutharizationStatus {
-  Auth= 'AUTH',
-  NoAuth = 'NO_AUTH',
-  Unknown = 'UNKNOWN',
-}
 
 export const RatingRewiev = [
   {
@@ -40,6 +33,17 @@ export const RatingRewiev = [
   },
 ];
 
-export const MIN_LENGTH_COMMENT = 50;
-export const MAX_LENGTH_COMMENT = 300;
+export const MarkerIcon = {
+  Default: '/img/pin.svg',
+  Active: '/img/pin-active.svg',
+  Size: {
+    Width: 28,
+    Height: 40,
+  }
+};
+export enum AutharizationStatus {
+  Auth= 'AUTH',
+  NoAuth = 'NO_AUTH',
+  Unknown = 'UNKNOWN',
+}
 
