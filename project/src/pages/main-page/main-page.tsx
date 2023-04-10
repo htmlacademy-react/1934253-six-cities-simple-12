@@ -2,7 +2,6 @@ import { OfferCards } from '../../types/offers';
 import ProductList from '../../components/product-list/product-list';
 import Map from '../../components/map/map';
 import { useState } from 'react';
-import { classNames } from '../../const';
 
 type MainPageProps = {
   countRooms: number;
@@ -10,10 +9,10 @@ type MainPageProps = {
 }
 
 const MainPages = ({countRooms, offers}: MainPageProps):JSX.Element =>{
-  const [selectedPoint, setActivePoint] = useState<number | null> (null);
+  const [selectedPoint, setSelectedPoint] = useState<number | null> (null);
   const onCardHover = (ActiveCard: number) => {
-    const currenCard = offers.find((offer) => offer.id === ActiveCard);
-    setActivePoint(currenCard ? currenCard.id : selectedPoint);
+    const currentCard = offers.find((offer) => offer.id === ActiveCard);
+    setSelectedPoint(currentCard ? currentCard.id : null);
   };
   return (
 
@@ -76,12 +75,12 @@ const MainPages = ({countRooms, offers}: MainPageProps):JSX.Element =>{
               </ul>
             </form>
             <div className="cities__places-list places__list tabs__content">
-              <ProductList offers = {offers} onCardHover = {onCardHover} className = {classNames.MainPageProductList} />
+              <ProductList offers={offers} onCardHover={onCardHover} className='cities__places-list places__list tabs__conten' />
             </div>
           </section>
           <div className="cities__right-section">
             <section className="cities__map map">
-              <Map city = {offers[0].city} points = {offers} selectedPoint = {selectedPoint} className= {classNames.MainPageMap}/>
+              <Map city={offers[0].city} points={offers} selectedPoint={selectedPoint} className='cities__map map' />
             </section>
           </div>
         </div>
