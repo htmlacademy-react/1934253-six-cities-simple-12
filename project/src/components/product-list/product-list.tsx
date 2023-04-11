@@ -1,6 +1,7 @@
 import ProductCard from '../product-card/product-card';
 import { OfferCards } from '../../types/offers';
 
+
 type ProductListProps = {
   offers: OfferCards;
   onCardHover: (ActiveCard: number) => void;

@@ -1,13 +1,22 @@
 import { ChangeEvent, Fragment, useState } from 'react';
 import { RatingRewiev } from '../../const';
 
+const MIN_LENGTH_COMMENT = 50;
+const MAX_LENGTH_COMMENT = 300;
+
 const ReviewForm = () => {
   const [stateInput, setStateInput] = useState({
     review: '',
     rating: 0
   });
+  
   const inputChange = (event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const {name, value} = event.target;
+
+  const isValidForm = () => {
+    const isMinLength = (MIN_LENGTH_COMMENT <= stateInput.review.length && MAX_LENGTH_COMMENT >= stateInput.review.length);
+    const isRated = stateInput.rating > 0;
+    return isMinLength && isRated;
     setStateInput({...stateInput, [name]: value});
   };
 
@@ -49,12 +58,10 @@ const ReviewForm = () => {
         <p className="reviews__help">
           <span className="reviews__star">rating</span> and describe your stay with at least <b className="reviews__text-amount">50 characters</b>.
         </p>
-        <button className="reviews__submit form__submit button" type="submit" disabled>Submit</button>
+        <button className="reviews__submit form__submit button" type="submit" disabled = {!isValidForm()}>Submit</button>
       </div>
     </form>
   );
-
-
 };
 
 export default ReviewForm;

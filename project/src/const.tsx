@@ -41,9 +41,9 @@ export const MarkerIcon = {
     Height: 40,
   }
 };
+
 export enum AutharizationStatus {
   Auth= 'AUTH',
   NoAuth = 'NO_AUTH',
   Unknown = 'UNKNOWN',
 }
-
