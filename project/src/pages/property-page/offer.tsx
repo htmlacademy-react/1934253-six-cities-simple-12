@@ -12,7 +12,7 @@ type OfferScreenProps = {
 const OfferScreen = ({reviews, offers}: OfferScreenProps): JSX.Element => {
   const [selectedPoint, setSelectedPoint] = useState<number | null> (null);
 
-  const offerList = offers.slice(1, 4);
+  const offerList = offers;
 
   const onCardHover = (ActiveCard: number) => {
     const currenCard = offerList.find((offer) => offer.id === ActiveCard);

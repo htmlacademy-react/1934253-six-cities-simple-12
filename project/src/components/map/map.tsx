@@ -30,7 +30,6 @@ const Map = ({city, points, selectedPoint, className}: MapProps) => {
 
   useEffect(() => {
     if (map) {
-
       points.forEach((point) => {
         const marker = new Marker({
           lat: point.location.latitude,

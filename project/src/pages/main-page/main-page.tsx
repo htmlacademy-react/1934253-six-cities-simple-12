@@ -2,6 +2,8 @@ import { OfferCards } from '../../types/offers';
 import ProductList from '../../components/product-list/product-list';
 import Map from '../../components/map/map';
 import { useState } from 'react';
+import CityOffers from '../../components/city-offers/city-offers';
+import { useAppDispatch, useAppSelector } from '../../hooks/index';
 
 
 type MainPageProps = {
@@ -15,45 +17,14 @@ const MainPages = ({countRooms, offers}: MainPageProps):JSX.Element =>{
     const currenCard = offers.find((offer) => offer.id === ActiveCard);
     setSelectedPoint(currenCard ? currenCard.id : selectedPoint);
   };
+  const city = useAppSelector((state) => state.city);
+  const points = useAppSelector((state) => state.nearestOffers);
   return (
 
     <main className="page__main page__main--index">
       <h1 className="visually-hidden">Cities</h1>
       <div className="tabs">
-        <section className="locations container">
-          <ul className="locations__list tabs__list">
-            <li className="locations__item">
-              <a className="locations__item-link tabs__item" href="#href">
-                <span>Paris</span>
-              </a>
-            </li>
-            <li className="locations__item">
-              <a className="locations__item-link tabs__item" href="#href">
-                <span>Cologne</span>
-              </a>
-            </li>
-            <li className="locations__item">
-              <a className="locations__item-link tabs__item" href="#href">
-                <span>Brussels</span>
-              </a>
-            </li>
-            <li className="locations__item">
-              <a className="locations__item-link tabs__item tabs__item--active" href='#href'>
-                <span>Amsterdam</span>
-              </a>
-            </li>
-            <li className="locations__item">
-              <a className="locations__item-link tabs__item" href="#href">
-                <span>Hamburg</span>
-              </a>
-            </li>
-            <li className="locations__item">
-              <a className="locations__item-link tabs__item" href="#href">
-                <span>Dusseldorf</span>
-              </a>
-            </li>
-          </ul>
-        </section>
+        <CityOffers />
       </div>
       <div className="cities">
         <div className="cities__places-container container">
@@ -76,12 +47,12 @@ const MainPages = ({countRooms, offers}: MainPageProps):JSX.Element =>{
               </ul>
             </form>
             <div className="cities__places-list places__list tabs__content">
-              <ProductList offers={offers} onCardHover={onCardHover} className='cities__places-list places__list tabs__conten' />
+              <ProductList offers={points} onCardHover={onCardHover} className='cities__places-list places__list tabs__conten' />
             </div>
           </section>
           <div className="cities__right-section">
             <section className="cities__map map">
-              <Map city={offers[0].city} points={offers} selectedPoint={selectedPoint} className='cities__map map' />
+              <Map city={city} points={points} selectedPoint={selectedPoint} className='cities__map map' />
             </section>
           </div>
         </div>
