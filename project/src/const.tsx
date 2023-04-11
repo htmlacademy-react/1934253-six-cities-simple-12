@@ -42,10 +42,3 @@ export const MarkerIcon = {
     Height: 40,
   }
 };
-
-export const classNames = {
-  MainPageProductList: 'cities__places-list places__list tabs__conten',
-  OfferPageProductList: 'near-places__list places__list',
-  MainPageMap: 'cities__map map',
-  OfferPageMap: 'property__map map',
-};

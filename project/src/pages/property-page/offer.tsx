@@ -2,9 +2,7 @@ import ProductList from '../../components/product-list/product-list';
 import CommentList from '../../components/review-list/review-list';
 import { OfferCards } from '../../types/offers';
 import { ReviewOfferCards } from '../../types/review';
-import { classNames } from '../../const';
 import { useState } from 'react';
-// import { useLocation } from 'react-router-dom';
 import Map from '../../components/map/map';
 
 type OfferScreenProps = {
@@ -12,11 +10,15 @@ type OfferScreenProps = {
   offers: OfferCards;
 }
 const OfferScreen = ({reviews, offers}: OfferScreenProps): JSX.Element => {
-  const [selectedPoint, setActivePoint] = useState<number | null> (null);
+  const [selectedPoint, setSelectedPoint] = useState<number | null> (null);
+
+  const offerList = offers.slice(1, 4);
+
   const onCardHover = (ActiveCard: number) => {
-    const currenCard = offers.find((offer) => offer.id === ActiveCard);
-    setActivePoint(currenCard ? currenCard.id : selectedPoint);
+    const currenCard = offerList.find((offer) => offer.id === ActiveCard);
+    setSelectedPoint(currenCard ? currenCard.id : null);
   };
+
   return (
     <main className="page__main page__main--property">
       <section className="property">
@@ -137,14 +139,14 @@ const OfferScreen = ({reviews, offers}: OfferScreenProps): JSX.Element => {
           </div>
         </div>
         <section className="property__map map">
-          <Map city = {offers[1].city} points = {offers} selectedPoint = {selectedPoint} className = {classNames.OfferPageMap} />
+          <Map city = {offers[1].city} points = {offerList} selectedPoint = {selectedPoint} className='property__map map' />
         </section>
       </section>
       <div className="container">
         <section className="near-places places">
           <h2 className="near-places__title">Other places in the neighbourhood</h2>
           <div className="near-places__list places__list">
-            <ProductList offers={offers} onCardHover = {onCardHover} className={classNames.OfferPageProductList} />
+            <ProductList offers={offerList} onCardHover={onCardHover} className='near-places__list places__list' />
           </div>
         </section>
       </div>

@@ -2,7 +2,7 @@ import {useRef, useEffect} from 'react';
 import { Icon, Marker } from 'leaflet';
 import { OfferCards, City } from '../../types/offers';
 import 'leaflet/dist/leaflet.css';
-import {MarkerIcon, classNames} from '../../const';
+import {MarkerIcon } from '../../const';
 import useMap from '../../hooks/useMap';
 
 type MapProps = {
@@ -27,10 +27,6 @@ const currentCustomIcon = new Icon ({
 const Map = ({city, points, selectedPoint, className}: MapProps) => {
   const mapRef = useRef(null);
   const map = useMap(mapRef, city);
-
-  if (className === classNames.OfferPageMap) {
-    points = points.slice(1, 4);
-  }
 
   useEffect(() => {
     if (map) {
