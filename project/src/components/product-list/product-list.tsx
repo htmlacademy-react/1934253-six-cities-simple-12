@@ -1,5 +1,5 @@
 import ProductCard from '../product-card/product-card';
-import { OfferCards } from '../../types/offer-type';
+import { OfferCards } from '../../types/offers';
 
 
 type ProductListProps = {

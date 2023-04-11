@@ -18,7 +18,7 @@ root.render(
     <App
       countRooms = {Setting.CountRooms}
       offers = {offers}
-      reviews = {reviews}
+      reviews={reviews}
     />
   </React.StrictMode>,
 );

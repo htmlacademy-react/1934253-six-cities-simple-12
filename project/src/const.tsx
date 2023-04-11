@@ -3,7 +3,6 @@ export enum AppRoute {
   Main = '/',
   Offer = '/offer/:id'
 }
-
 export const MAX_RATING = 5;
 
 export const RatingRewiev = [
@@ -42,3 +41,9 @@ export const MarkerIcon = {
     Height: 40,
   }
 };
+
+export enum AutharizationStatus {
+  Auth= 'AUTH',
+  NoAuth = 'NO_AUTH',
+  Unknown = 'UNKNOWN',
+}

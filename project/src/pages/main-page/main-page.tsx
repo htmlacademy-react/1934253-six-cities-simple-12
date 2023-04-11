@@ -3,7 +3,6 @@ import ProductList from '../../components/product-list/product-list';
 import Map from '../../components/map/map';
 import { useState } from 'react';
 
-
 type MainPageProps = {
   countRooms: number;
   offers: OfferCards;
@@ -12,8 +11,8 @@ type MainPageProps = {
 const MainPages = ({countRooms, offers}: MainPageProps):JSX.Element =>{
   const [selectedPoint, setSelectedPoint] = useState<number | null> (null);
   const onCardHover = (ActiveCard: number) => {
-    const currenCard = offers.find((offer) => offer.id === ActiveCard);
-    setSelectedPoint(currenCard ? currenCard.id : selectedPoint);
+    const currentCard = offers.find((offer) => offer.id === ActiveCard);
+    setSelectedPoint(currentCard ? currentCard.id : null);
   };
   return (
 

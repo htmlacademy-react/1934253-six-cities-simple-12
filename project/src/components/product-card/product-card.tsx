@@ -1,6 +1,5 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
 import { Link } from 'react-router-dom';
-import { OfferCard } from '../../types/offer-type';
+import { OfferCard } from '../../types/offers';
 import { MAX_RATING } from '../../const';
 
 type CardProps = {
@@ -31,7 +30,6 @@ const ProductCard = ({ offer, onCardHover }: CardProps) => {
             <b className="place-card__price-value">&euro;{price}</b>
             <span className="place-card__price-text">&#47;&nbsp;night</span>
           </div>
-
         </div>
         <div className="place-card__rating rating">
           <div className="place-card__stars rating__stars">

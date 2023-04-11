@@ -10,13 +10,13 @@ type OfferScreenProps = {
   offers: OfferCards;
 }
 const OfferScreen = ({reviews, offers}: OfferScreenProps): JSX.Element => {
-  const [selectedPoint, setSelectedPoint] = useState<number | null> (null);
-
   const offerList = offers.slice(1, 4);
 
+  const [selectedPoint, setSelectedPoint] = useState<number | null> (null);
+
   const onCardHover = (ActiveCard: number) => {
-    const currenCard = offerList.find((offer) => offer.id === ActiveCard);
-    setSelectedPoint(currenCard ? currenCard.id : null);
+    const currentCard = offerList.find((offer) => offer.id === ActiveCard);
+    setSelectedPoint(currentCard ? currentCard.id : null);
   };
 
   return (
@@ -139,7 +139,7 @@ const OfferScreen = ({reviews, offers}: OfferScreenProps): JSX.Element => {
           </div>
         </div>
         <section className="property__map map">
-          <Map city = {offers[1].city} points = {offerList} selectedPoint = {selectedPoint} className='property__map map' />
+          <Map city={offers[1].city} points={offerList} selectedPoint={selectedPoint} className='property__map map' />
         </section>
       </section>
       <div className="container">
