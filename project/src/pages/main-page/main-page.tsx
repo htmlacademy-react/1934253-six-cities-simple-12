@@ -1,36 +1,28 @@
-import { OfferCards } from '../../types/offers';
 import ProductList from '../../components/product-list/product-list';
 import Map from '../../components/map/map';
-import { useState } from 'react';
-import CityOffers from '../../components/city-offers/city-offers';
-import { useAppDispatch, useAppSelector } from '../../hooks/index';
+import CitiesOffers from '../../components/cities-offers/cities-offers';
+import { useAppSelector } from '../../hooks/index';
 
 
-type MainPageProps = {
-  countRooms: number;
-  offers: OfferCards;
-}
+const MainPages = ():JSX.Element =>{
 
-const MainPages = ({countRooms, offers}: MainPageProps):JSX.Element =>{
-  const [selectedPoint, setSelectedPoint] = useState<number | null> (null);
-  const onCardHover = (ActiveCard: number) => {
-    const currenCard = offers.find((offer) => offer.id === ActiveCard);
-    setSelectedPoint(currenCard ? currenCard.id : selectedPoint);
-  };
   const city = useAppSelector((state) => state.city);
   const points = useAppSelector((state) => state.nearestOffers);
+
   return (
 
     <main className="page__main page__main--index">
       <h1 className="visually-hidden">Cities</h1>
       <div className="tabs">
-        <CityOffers />
+        <section className="locations container">
+          <CitiesOffers />
+        </section>
       </div>
       <div className="cities">
         <div className="cities__places-container container">
           <section className="cities__places places">
             <h2 className="visually-hidden">Places</h2>
-            <b className="places__found">{countRooms} places to stay in Amsterdam</b>
+            <b className="places__found">{points.length} places to stay in {city.name}</b>
             <form className="places__sorting" action="#" method="get">
               <span className="places__sorting-caption">Sort by</span>
               <span className="places__sorting-type" tabIndex={0}>
@@ -47,12 +39,12 @@ const MainPages = ({countRooms, offers}: MainPageProps):JSX.Element =>{
               </ul>
             </form>
             <div className="cities__places-list places__list tabs__content">
-              <ProductList offers={points} onCardHover={onCardHover} className='cities__places-list places__list tabs__conten' />
+              <ProductList offers={points} className='cities__places-list places__list tabs__conten' />
             </div>
           </section>
           <div className="cities__right-section">
             <section className="cities__map map">
-              <Map city={city} points={points} selectedPoint={selectedPoint} className='cities__map map' />
+              <Map city={city} className='cities__map map' />
             </section>
           </div>
         </div>

@@ -1,23 +1,26 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
 import { Link } from 'react-router-dom';
 import { OfferCard } from '../../types/offer-type';
 import { MAX_RATING } from '../../const';
+import { useAppDispatch } from '../../hooks';
+import { changeFocusCard } from '../../store/action';
 
 type CardProps = {
   offer: OfferCard;
-  onCardHover: (ActiveCard: number) => void;
+  // onCardHover: (ActiveCard: number) => void;
 }
 
-const ProductCard = ({ offer, onCardHover }: CardProps) => {
+const ProductCard = ({ offer, /*onCardHover*/ }: CardProps) => {
   const { id, isPremium, previewImage, price, rating, title, type } = offer;
   const ratingWidth = Math.round(rating / MAX_RATING) * 100;
   const premium = isPremium ? <div className="place-card__mark"><span>Premium</span></div> : null;
-  const cardHoverHandler = () => onCardHover(offer.id);
+  // const cardHoverHandler = () => onCardHover(offer.id);
+  const cardHoverHandler = useAppDispatch();
   return (
     <article
       className="cities__card place-card"
       key={offer.id}
-      onMouseEnter = {cardHoverHandler}
+      onMouseEnter = {() => cardHoverHandler(changeFocusCard(offer.id))}
+      onMouseLeave = {() => cardHoverHandler(changeFocusCard(null))}
     >
       {premium}
       <div className="cities__image-wrapper place-card__image-wrapper">

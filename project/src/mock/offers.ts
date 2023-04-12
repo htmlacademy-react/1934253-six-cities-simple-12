@@ -188,13 +188,11 @@ export const offers: OfferCards = [
       avatarUrl: 'img/avatar-angelina.jpg',
     },
   },
-
-
   {
     'bedrooms': 10,
     'city': {
       'location': {
-        'latitude': 52.3909553943508,
+        'latitude':53.3909553943508,
         'longitude': 4.939309666406198,
         'zoom': 10
       },
@@ -231,8 +229,8 @@ export const offers: OfferCards = [
     'bedrooms': 10,
     'city': {
       'location': {
-        'latitude': 52.3909553943508,
-        'longitude': 4.939309666406198,
+        'latitude': 5.3909553943508,
+        'longitude': 1.939309666406198,
         'zoom': 10
       },
       'name': 'Brussels'
@@ -268,8 +266,8 @@ export const offers: OfferCards = [
     'bedrooms': 10,
     'city': {
       'location': {
-        'latitude': 52.3909553943508,
-        'longitude': 4.939309666406198,
+        'latitude': 5.3909553943508,
+        'longitude': 1.939309666406198,
         'zoom': 10
       },
       'name': 'Brussels'
@@ -305,8 +303,8 @@ export const offers: OfferCards = [
     'bedrooms': 10,
     'city': {
       'location': {
-        'latitude': 52.3909553943508,
-        'longitude': 4.939309666406198,
+        'latitude': 5.3909553943508,
+        'longitude': 1.939309666406198,
         'zoom': 10
       },
       'name': 'Brussels'
@@ -342,7 +340,7 @@ export const offers: OfferCards = [
     'bedrooms': 10,
     'city': {
       'location': {
-        'latitude': 52.3909553943508,
+        'latitude': 56.3909553943508,
         'longitude': 4.939309666406198,
         'zoom': 10
       },
@@ -401,8 +399,8 @@ export const offers: OfferCards = [
     ],
     'isPremium': false,
     'location': {
-      'latitude': 52.3909553943508,
-      'longitude': 4.939309666406198,
+      'latitude': 48.846610000000005,
+      'longitude': 2.374499,
       'zoom': 8
     },
     'maxAdults': 4,
@@ -438,8 +436,8 @@ export const offers: OfferCards = [
     ],
     'isPremium': false,
     'location': {
-      'latitude': 52.3909553943508,
-      'longitude': 4.939309666406198,
+      'latitude': 48.94610000000005,
+      'longitude': 2.374499,
       'zoom': 8
     },
     'maxAdults': 4,

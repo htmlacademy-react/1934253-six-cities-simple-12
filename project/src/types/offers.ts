@@ -36,10 +36,12 @@ type Host = {
 
 export type OfferCards = OfferCard[];
 
-export type CitiesName = {
+export type CityName = {
   'name': string;
   'location': {
     'latitude': number;
     'longitude': number;
   };
 }
+
+export type CitiesNames = CityName[];

@@ -4,13 +4,13 @@ import { OfferCards } from '../../types/offer-type';
 
 type ProductListProps = {
   offers: OfferCards;
-  onCardHover: (ActiveCard: number) => void;
+  // onCardHover: (ActiveCard: number) => void;
   className: string;
 }
 
-const ProductList = ({offers, onCardHover, className}: ProductListProps) => (
+const ProductList = ({offers, /*onCardHover,*/ className}: ProductListProps) => (
   <div className={className}>
-    {offers.map((offer) => <ProductCard key={offer.id} offer={offer} onCardHover={onCardHover} />)}
+    {offers.map((offer) => <ProductCard key={offer.id} offer={offer} /*onCardHover={onCardHover}*/ />)}
   </div>
 );
 

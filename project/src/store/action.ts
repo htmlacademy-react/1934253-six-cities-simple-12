@@ -1,5 +1,6 @@
 import { createAction } from '@reduxjs/toolkit';
-import { OfferCard,CitiesName } from '../types/offers';
+import { OfferCard,CityName } from '../types/offers';
 
-export const changeCity = createAction<CitiesName>('changeCity');
+export const changeCity = createAction<CityName>('changeCity');
 export const fillOfferList = createAction<OfferCard>('fillOfferList');
+export const changeFocusCard = createAction<number | null>('changeFocusCard');
