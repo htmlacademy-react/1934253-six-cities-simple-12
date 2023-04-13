@@ -8,6 +8,7 @@ type OfferScreenProps = {
   reviews: ReviewOfferCards;
   offers: OfferCards;
 }
+
 const OfferScreen = ({reviews, offers}: OfferScreenProps): JSX.Element => (
   <main className="page__main page__main--property">
     <section className="property">

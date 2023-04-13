@@ -10,12 +10,10 @@ const ReviewForm = () => {
     rating: 0
   });
 
-
   const inputChange = (event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const {name, value} = event.target;
     setStateInput({...stateInput, [name]: value});
   };
-
 
   const isValidForm = () => {
     const isMinLength = (MIN_LENGTH_COMMENT <= stateInput.review.length && MAX_LENGTH_COMMENT >= stateInput.review.length);
