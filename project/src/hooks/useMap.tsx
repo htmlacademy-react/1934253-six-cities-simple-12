@@ -1,5 +1,5 @@
 import {useEffect, useState, MutableRefObject, useRef} from 'react';
-import { Map, TileLayer } from 'leaflet';
+import Leaflet, { Map, TileLayer } from 'leaflet';
 import {City} from '../types/offers';
 
 const useMap = (
@@ -34,6 +34,11 @@ const useMap = (
       isRenderRef.current = true;
     }
   }, [mapRef, city.location]);
+  useEffect(() => {
+    if(map) {
+      map.flyTo(new Leaflet.LatLng(city.location.latitude, city.location.longitude));
+    }
+  }, [map, city.location]);
   return map;
 };
 

@@ -1,6 +1,6 @@
 import { createReducer } from '@reduxjs/toolkit';
 import { offers } from '../mock/offers';
-import { changeCity, changeFocusCard, fillOfferList } from './action';
+import { changeCity, selectCard, fillOfferList } from './action';
 import { defaultCity } from '../const';
 import { initialStates } from '../types/state';
 
@@ -24,7 +24,7 @@ export const reducer = createReducer(initialState, (builder) =>{
         state.nearestOffers = offers.filter((item) => item.city.name === state.city.name);
       }
     })
-    .addCase(changeFocusCard, (state, action) => {
+    .addCase(selectCard, (state, action) => {
       state.focusCardId = action.payload;
     });
 });

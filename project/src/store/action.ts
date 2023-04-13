@@ -3,4 +3,4 @@ import { OfferCard,CityName } from '../types/offers';
 
 export const changeCity = createAction<CityName>('changeCity');
 export const fillOfferList = createAction<OfferCard>('fillOfferList');
-export const changeFocusCard = createAction<number | null>('changeFocusCard');
+export const selectCard = createAction<number | null>('selectCard');

@@ -5,18 +5,21 @@ const MIN_LENGTH_COMMENT = 50;
 const MAX_LENGTH_COMMENT = 300;
 
 const ReviewForm = () => {
-  const [formData, setFormData] = useState({
+  const [stateInput, setStateInput] = useState({
     review: '',
     rating: 0
   });
+
+
   const inputChange = (event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const {name, value} = event.target;
-    setFormData({...formData, [name]: value});
+    setStateInput({...stateInput, [name]: value});
   };
 
+
   const isValidForm = () => {
-    const isMinLength = (MIN_LENGTH_COMMENT <= formData.review.length && MAX_LENGTH_COMMENT >= formData.review.length);
-    const isRated = formData.rating > 0;
+    const isMinLength = (MIN_LENGTH_COMMENT <= stateInput.review.length && MAX_LENGTH_COMMENT >= stateInput.review.length);
+    const isRated = stateInput.rating > 0;
     return isMinLength && isRated;
   };
 
@@ -51,7 +54,7 @@ const ReviewForm = () => {
         id="review"
         name="review"
         placeholder="Tell how was your stay, what you like and what can be improved"
-        value = {formData.review}
+        value = {stateInput.review}
         onChange = {inputChange}
       />
       <div className="reviews__button-wrapper">
@@ -62,8 +65,6 @@ const ReviewForm = () => {
       </div>
     </form>
   );
-
-
 };
 
 export default ReviewForm;

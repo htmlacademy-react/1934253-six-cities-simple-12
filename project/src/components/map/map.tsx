@@ -1,8 +1,8 @@
-import {useRef, useEffect} from 'react';
-import { Icon, Marker } from 'leaflet';
+import {useRef, useEffect } from 'react';
+import { Icon, Marker, LayerGroup } from 'leaflet';
 import { City } from '../../types/offers';
 import 'leaflet/dist/leaflet.css';
-import {MarkerIcon } from '../../const';
+import { MarkerIcon } from '../../const';
 import useMap from '../../hooks/useMap';
 import { useAppSelector } from '../../hooks';
 
@@ -24,33 +24,39 @@ const currentCustomIcon = new Icon ({
 });
 
 const Map = ({city, className}: MapProps) => {
-
+  const points = useAppSelector((state) => state.nearestOffers);
+  const pointId = useAppSelector((state) => state.focusCardId);
   const mapRef = useRef(null);
   const map = useMap(mapRef, city);
 
-  const points = useAppSelector((state) => state.nearestOffers);
-  const pointId = useAppSelector((state) => state.focusCardId);
-
   useEffect(() => {
     if (map) {
-      points.forEach((point) => {
-        const marker = new Marker({
-          lat: point.location.latitude,
-          lng: point.location.longitude,
-        });
+      const markers = points.map(
+        (point) =>
+          new Marker(
+            {
+              lat: point.location.latitude,
+              lng: point.location.longitude,
+            },
+            {
+              icon: pointId === point.id ? currentCustomIcon : defaultCustomIcon,
+            }
+          )
+      );
 
-        marker.setIcon(
-          (pointId === point.id ? currentCustomIcon : defaultCustomIcon)
-        )
-          .addTo(map);
-      });
+      const markersLayer = new LayerGroup(markers);
+      markersLayer.addTo(map);
+
+      return () => {
+        map.removeLayer(markersLayer);
+      };
     }
   }, [map, points, pointId]);
   return (
     <section
       className="className"
       ref = {mapRef}
-      style={{height: '100%'}}
+      style={{height: '100%', minHeight: '500px'}}
     >
 
     </section>);

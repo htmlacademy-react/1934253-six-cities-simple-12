@@ -8,9 +8,9 @@ type Prop ={
 
 const City = ({city} :Prop) => {
   const activeCity = useAppSelector((state) => state.city.name);
-  const onActiveCity = useAppDispatch();
+  const dispatch = useAppDispatch();
   return (
-    <a className={`locations__item-link tabs__item ${city.name === activeCity ? 'tabs__item--active' : ''}` } onClick ={() => onActiveCity(changeCity(city))} href='#href'>
+    <a className={`locations__item-link tabs__item ${city.name === activeCity ? 'tabs__item--active' : ''}` } onClick ={() => dispatch(changeCity(city))} href='#href'>
       <span>{city.name}</span>
     </a>
   );

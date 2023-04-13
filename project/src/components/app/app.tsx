@@ -5,7 +5,7 @@ import LoginPage from '../../pages/login-page/login';
 import OfferScreen from '../../pages/property-page/offer';
 import ErrorPage from '../../pages/page-not-found/page-not-found';
 import Layout from '../layout/layout';
-import { OfferCards } from '../../types/offer-type';
+import { OfferCards } from '../../types/offers';
 import { ReviewOfferCards } from '../../types/review';
 
 

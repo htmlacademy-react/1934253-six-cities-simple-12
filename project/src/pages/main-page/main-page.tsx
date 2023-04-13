@@ -1,28 +1,37 @@
 import ProductList from '../../components/product-list/product-list';
 import Map from '../../components/map/map';
-import CitiesOffers from '../../components/cities-offers/cities-offers';
+import Cities from '../../components/cities-offers/cities-offers';
 import { useAppSelector } from '../../hooks/index';
+import { plural } from '../../const';
 
+function getTextByCount(count: number, city: string): string {
+  const pluralRules = plural.select(count);
+  switch (pluralRules) {
+    case 'one':
+      return `${count} place to stay in ${city}`;
+    default:
+      return `${count} places to stay in ${city}`;
+  }
+}
 
 const MainPages = ():JSX.Element =>{
 
   const city = useAppSelector((state) => state.city);
   const points = useAppSelector((state) => state.nearestOffers);
-
   return (
 
     <main className="page__main page__main--index">
       <h1 className="visually-hidden">Cities</h1>
       <div className="tabs">
         <section className="locations container">
-          <CitiesOffers />
+          <Cities />
         </section>
       </div>
       <div className="cities">
         <div className="cities__places-container container">
           <section className="cities__places places">
             <h2 className="visually-hidden">Places</h2>
-            <b className="places__found">{points.length} places to stay in {city.name}</b>
+            <b className="places__found">{getTextByCount(points.length, city.name)}</b>
             <form className="places__sorting" action="#" method="get">
               <span className="places__sorting-caption">Sort by</span>
               <span className="places__sorting-type" tabIndex={0}>
@@ -39,7 +48,7 @@ const MainPages = ():JSX.Element =>{
               </ul>
             </form>
             <div className="cities__places-list places__list tabs__content">
-              <ProductList offers={points} className='cities__places-list places__list tabs__conten' />
+              <ProductList offers={points} className='cities__places-list places__list tabs__content' />
             </div>
           </section>
           <div className="cities__right-section">
