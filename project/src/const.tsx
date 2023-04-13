@@ -44,7 +44,6 @@ export const MarkerIcon = {
   }
 };
 
-
 export const defaultCity = {
   location: {
     latitude: 48.8534100,
