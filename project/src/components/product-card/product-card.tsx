@@ -1,22 +1,24 @@
 import { Link } from 'react-router-dom';
 import { OfferCard } from '../../types/offers';
 import { MAX_RATING } from '../../const';
+import { useAppDispatch } from '../../hooks';
+import { selectCard } from '../../store/action';
 
 type CardProps = {
   offer: OfferCard;
-  onCardHover: (ActiveCard: number) => void;
 }
 
-const ProductCard = ({ offer, onCardHover }: CardProps) => {
+const ProductCard = ({ offer }: CardProps) => {
   const { id, isPremium, previewImage, price, rating, title, type } = offer;
   const ratingWidth = Math.round(rating / MAX_RATING) * 100;
   const premium = isPremium ? <div className="place-card__mark"><span>Premium</span></div> : null;
-  const cardHoverHandler = () => onCardHover(offer.id);
+  const cardHoverHandler = useAppDispatch();
   return (
     <article
       className="cities__card place-card"
       key={offer.id}
-      onMouseEnter = {cardHoverHandler}
+      onMouseEnter = {() => cardHoverHandler(selectCard(offer.id))}
+      onMouseLeave = {() => cardHoverHandler(selectCard(null))}
     >
       {premium}
       <div className="cities__image-wrapper place-card__image-wrapper">

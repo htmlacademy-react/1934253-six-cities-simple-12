@@ -1,64 +1,38 @@
-import { OfferCards } from '../../types/offers';
 import ProductList from '../../components/product-list/product-list';
 import Map from '../../components/map/map';
-import { useState } from 'react';
+import Cities from '../../components/cities-offers/cities-offers';
+import { useAppSelector } from '../../hooks/index';
+import { plural } from '../../const';
 
-type MainPageProps = {
-  countRooms: number;
-  offers: OfferCards;
+function getTextByCount(count: number, city: string): string {
+  const pluralRules = plural.select(count);
+  switch (pluralRules) {
+    case 'one':
+      return `${count} place to stay in ${city}`;
+    default:
+      return `${count} places to stay in ${city}`;
+  }
 }
 
-const MainPages = ({countRooms, offers}: MainPageProps):JSX.Element =>{
-  const [selectedPoint, setSelectedPoint] = useState<number | null> (null);
-  const onCardHover = (ActiveCard: number) => {
-    const currentCard = offers.find((offer) => offer.id === ActiveCard);
-    setSelectedPoint(currentCard ? currentCard.id : null);
-  };
+const MainPages = ():JSX.Element =>{
+
+  const city = useAppSelector((state) => state.city);
+  const points = useAppSelector((state) => state.nearestOffers);
+
   return (
 
     <main className="page__main page__main--index">
       <h1 className="visually-hidden">Cities</h1>
       <div className="tabs">
         <section className="locations container">
-          <ul className="locations__list tabs__list">
-            <li className="locations__item">
-              <a className="locations__item-link tabs__item" href="#href">
-                <span>Paris</span>
-              </a>
-            </li>
-            <li className="locations__item">
-              <a className="locations__item-link tabs__item" href="#href">
-                <span>Cologne</span>
-              </a>
-            </li>
-            <li className="locations__item">
-              <a className="locations__item-link tabs__item" href="#href">
-                <span>Brussels</span>
-              </a>
-            </li>
-            <li className="locations__item">
-              <a className="locations__item-link tabs__item tabs__item--active" href='#href'>
-                <span>Amsterdam</span>
-              </a>
-            </li>
-            <li className="locations__item">
-              <a className="locations__item-link tabs__item" href="#href">
-                <span>Hamburg</span>
-              </a>
-            </li>
-            <li className="locations__item">
-              <a className="locations__item-link tabs__item" href="#href">
-                <span>Dusseldorf</span>
-              </a>
-            </li>
-          </ul>
+          <Cities />
         </section>
       </div>
       <div className="cities">
         <div className="cities__places-container container">
           <section className="cities__places places">
             <h2 className="visually-hidden">Places</h2>
-            <b className="places__found">{countRooms} places to stay in Amsterdam</b>
+            <b className="places__found">{getTextByCount(points.length, city.name)}</b>
             <form className="places__sorting" action="#" method="get">
               <span className="places__sorting-caption">Sort by</span>
               <span className="places__sorting-type" tabIndex={0}>
@@ -75,12 +49,12 @@ const MainPages = ({countRooms, offers}: MainPageProps):JSX.Element =>{
               </ul>
             </form>
             <div className="cities__places-list places__list tabs__content">
-              <ProductList offers={offers} onCardHover={onCardHover} className='cities__places-list places__list tabs__conten' />
+              <ProductList offers={points} className='cities__places-list places__list tabs__content' />
             </div>
           </section>
           <div className="cities__right-section">
             <section className="cities__map map">
-              <Map city={offers[0].city} points={offers} selectedPoint={selectedPoint} className='cities__map map' />
+              <Map city={city} className='cities__map map' />
             </section>
           </div>
         </div>
