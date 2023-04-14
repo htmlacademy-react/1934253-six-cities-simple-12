@@ -19,7 +19,6 @@ const ReviewForm = () => {
     const isMinLength = (MIN_LENGTH_COMMENT <= stateInput.review.length && MAX_LENGTH_COMMENT >= stateInput.review.length);
     const isRated = stateInput.rating > 0;
     return isMinLength && isRated;
-    setStateInput({...stateInput, [name]: value});
   };
 
   return (

@@ -19,7 +19,6 @@ const MainPages = () =>{
 
   const city = useAppSelector((state) => state.city);
   const points = useAppSelector((state) => state.nearestOffers);
-
   return (
 
     <main className="page__main page__main--index">

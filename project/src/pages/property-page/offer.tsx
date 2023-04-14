@@ -127,17 +127,6 @@ const OfferScreen = ({reviews, offers}: OfferScreenProps): JSX.Element => (
             <CommentList reviews={reviews}/>
           </section>
         </div>
-        <section className="property__map map">
-          <Map city={offers[1].city} points={offerList} selectedPoint={selectedPoint} className='property__map map' />
-        </section>
-      </section>
-      <div className="container">
-        <section className="near-places places">
-          <h2 className="near-places__title">Other places in the neighbourhood</h2>
-          <div className="near-places__list places__list">
-            <ProductList offers={offerList} onCardHover={onCardHover} className='near-places__list places__list' />
-          </div>
-        </section>
       </div>
       <section className="property__map map">
         <Map city = {offers[1].city} className='property__map map' />
