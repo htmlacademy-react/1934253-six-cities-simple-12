@@ -1,14 +1,16 @@
 import { createReducer } from '@reduxjs/toolkit';
 import { offers } from '../mock/offers';
-import { changeCity, selectCard, fillOfferList } from './action';
-import { defaultCity } from '../const';
+import { changeCity, selectCard, fillOfferList, filterOffers } from './action';
+import { defaultCity, filter } from '../const';
 import { initialStates } from '../types/state';
 
-
+const initialOffers = offers.filter((offer) => offer.city.name === defaultCity.name);
 export const initialState: initialStates = {
+
   city:  defaultCity,
-  nearestOffers: offers.filter((offer) => offer.city.name === defaultCity.name),
+  nearestOffers: initialOffers,
   focusCardId: null,
+  filterOffer: filter.top,
 };
 
 export const reducer = createReducer(initialState, (builder) =>{
@@ -26,5 +28,21 @@ export const reducer = createReducer(initialState, (builder) =>{
     })
     .addCase(selectCard, (state, action) => {
       state.focusCardId = action.payload;
+    })
+    .addCase(filterOffers, (state, action) => {
+      state.filterOffer = action.payload;
+      state.nearestOffers.sort((a, b) => {
+        switch (state.filterOffer) {
+          case filter.high:
+            return b.price - a.price;
+          case filter.low:
+            return a.price - b.price;
+          case filter.top:
+            return b.rating - a.rating;
+          default:
+            return 0;
+        }
+      });
+
     });
 });

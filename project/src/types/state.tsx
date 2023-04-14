@@ -9,4 +9,5 @@ export type initialStates = {
   focusCardId: number | null;
   nearestOffers: OfferCards;
   city: City;
+  filterOffer: string;
 }
