@@ -18,7 +18,7 @@ const Filter = () => {
       <span className="places__sorting-caption">Sort by</span>
       <span
         className="places__sorting-type" tabIndex={0}
-        onMouseEnter = {handleFilterChange}
+        onClick = {handleFilterChange}
       >
         {select}
         <svg className="places__sorting-arrow" width="7" height="4">

@@ -12,7 +12,7 @@ export const offers: OfferCards = [
       'img/apartment-01.jpg',
       'img/apartment-01.jpg',
     ],
-    price: 120,
+    price: 127,
     rating: 3.8,
     title: 'Beautiful & luxurious apartment at great location',
     type: 'Apartment',
@@ -294,7 +294,7 @@ export const offers: OfferCards = [
     },
     'maxAdults': 4,
     'previewImage': 'img/apartment-03.jpg',
-    'price': 120,
+    'price': 122,
     'rating': 4.8,
     'title': 'Beautiful & luxurious',
     'type': 'apartment'
@@ -331,7 +331,7 @@ export const offers: OfferCards = [
     },
     'maxAdults': 4,
     'previewImage': 'img/apartment-03.jpg',
-    'price': 120,
+    'price': 123,
     'rating': 4.8,
     'title': 'Beautiful & luxurious',
     'type': 'apartment'
@@ -368,7 +368,7 @@ export const offers: OfferCards = [
     },
     'maxAdults': 4,
     'previewImage': 'img/apartment-03.jpg',
-    'price': 120,
+    'price': 124,
     'rating': 4.8,
     'title': 'Beautiful & luxurious',
     'type': 'apartment'
@@ -405,7 +405,7 @@ export const offers: OfferCards = [
     },
     'maxAdults': 4,
     'previewImage': 'img/apartment-03.jpg',
-    'price': 120,
+    'price': 125,
     'rating': 4.8,
     'title': 'Beautiful & luxurious',
     'type': 'apartment'
@@ -442,7 +442,7 @@ export const offers: OfferCards = [
     },
     'maxAdults': 4,
     'previewImage': 'img/apartment-03.jpg',
-    'price': 120,
+    'price': 126,
     'rating': 4.8,
     'title': 'Beautiful & luxurious',
     'type': 'apartment'
