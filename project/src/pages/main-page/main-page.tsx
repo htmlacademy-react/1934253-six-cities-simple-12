@@ -18,7 +18,7 @@ function getTextByCount(count: number, city: string): string {
 const MainPages = () =>{
 
   const city = useAppSelector((state) => state.city);
-  const points = useAppSelector((state) => state.nearestOffers);
+  const points = useAppSelector((state) => state.offers.filter((offer) => offer.city.name === state.city.name));
   return (
 
     <main className="page__main page__main--index">
@@ -38,7 +38,7 @@ const MainPages = () =>{
           </section>
           <div className="cities__right-section">
             <section className="cities__map map">
-              <Map city={city} className='cities__map map' />
+              <Map city={city} offers={points} className='cities__map map' />
             </section>
           </div>
         </div>

@@ -45,3 +45,29 @@ export type CityName = {
 }
 
 export type CitiesNames = CityName[];
+
+export type AuthData = {
+  login: string;
+  password: string;
+};
+
+export type UserData = {
+  id: number;
+  email: string;
+  token: string;
+};
+
+export type ReviewOfferCard = {
+  id: number;
+  user: {
+    avatarUrl :string;
+    id: number;
+    isPro: boolean;
+    name: string;
+  };
+  rating: number;
+  comment: string;
+  date: string;
+};
+
+export type ReviewOfferCards = ReviewOfferCard[];

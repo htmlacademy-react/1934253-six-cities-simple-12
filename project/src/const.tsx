@@ -7,6 +7,8 @@ export const MAX_RATING = 5;
 
 export const plural = new Intl.PluralRules('en-US');
 
+export const TIMEOUT_SHOW_ERROR = 2000;
+
 export const RatingRewiev = [
   {
     id: 5,
@@ -112,3 +114,16 @@ export const filter = {
   high: 'Price: high to low',
   top: 'Top rated first',
 };
+
+export enum AuthorizationStatus {
+  Auth = 'AUTH',
+  NoAuth = 'NO_AUTH',
+  Unknown = 'UNKNOWN',
+}
+
+export enum APIRoute {
+  Offers = '/hotels',
+  Comments = '/comments',
+  Login = '/login',
+  LogOut = '/logout',
+}
