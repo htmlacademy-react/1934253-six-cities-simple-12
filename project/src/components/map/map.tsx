@@ -1,6 +1,6 @@
 import {useRef, useEffect } from 'react';
 import { Icon, Marker, LayerGroup } from 'leaflet';
-import { City } from '../../types/offers';
+import { City, OfferCards } from '../../types/offers';
 import 'leaflet/dist/leaflet.css';
 import { MarkerIcon } from '../../const';
 import useMap from '../../hooks/useMap';
@@ -9,6 +9,7 @@ import { useAppSelector } from '../../hooks';
 type MapProps = {
   city: City;
   className: string;
+  offers: OfferCards;
 }
 
 const defaultCustomIcon = new Icon ({
@@ -23,15 +24,14 @@ const currentCustomIcon = new Icon ({
   iconAnchor: [MarkerIcon.Size.Width, MarkerIcon.Size.Height],
 });
 
-const Map = ({city, className}: MapProps) => {
-  const points = useAppSelector((state) => state.nearestOffers);
+const Map = ({city, offers, className}: MapProps) => {
   const pointId = useAppSelector((state) => state.focusCardId);
   const mapRef = useRef(null);
   const map = useMap(mapRef, city);
 
   useEffect(() => {
     if (map) {
-      const markers = points.map(
+      const markers = offers.map(
         (point) =>
           new Marker(
             {
@@ -51,7 +51,7 @@ const Map = ({city, className}: MapProps) => {
         map.removeLayer(markersLayer);
       };
     }
-  }, [map, points, pointId]);
+  }, [map, offers, pointId]);
   return (
     <section
       className="className"
