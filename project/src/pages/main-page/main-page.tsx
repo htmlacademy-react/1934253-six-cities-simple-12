@@ -3,6 +3,7 @@ import Map from '../../components/map/map';
 import Cities from '../../components/cities-offers/cities-offers';
 import { useAppSelector } from '../../hooks/index';
 import { plural } from '../../const';
+import Filter from '../../components/sorting-filter/filter';
 
 function getTextByCount(count: number, city: string): string {
   const pluralRules = plural.select(count);
@@ -14,11 +15,10 @@ function getTextByCount(count: number, city: string): string {
   }
 }
 
-const MainPages = ():JSX.Element =>{
+const MainPages = () =>{
 
   const city = useAppSelector((state) => state.city);
   const points = useAppSelector((state) => state.nearestOffers);
-
   return (
 
     <main className="page__main page__main--index">
@@ -33,24 +33,8 @@ const MainPages = ():JSX.Element =>{
           <section className="cities__places places">
             <h2 className="visually-hidden">Places</h2>
             <b className="places__found">{getTextByCount(points.length, city.name)}</b>
-            <form className="places__sorting" action="#" method="get">
-              <span className="places__sorting-caption">Sort by</span>
-              <span className="places__sorting-type" tabIndex={0}>
-                  Popular
-                <svg className="places__sorting-arrow" width="7" height="4">
-                  <use xlinkHref="#icon-arrow-select"></use>
-                </svg>
-              </span>
-              <ul className="places__options places__options--custom places__options--opened">
-                <li className="places__option places__option--active" tabIndex={0}>Popular</li>
-                <li className="places__option" tabIndex={0}>Price: low to high</li>
-                <li className="places__option" tabIndex={0}>Price: high to low</li>
-                <li className="places__option" tabIndex={0}>Top rated first</li>
-              </ul>
-            </form>
-            <div className="cities__places-list places__list tabs__content">
-              <ProductList offers={points} className='cities__places-list places__list tabs__content' />
-            </div>
+            <Filter />
+            <ProductList offers={points} className='cities__places-list places__list tabs__content' />
           </section>
           <div className="cities__right-section">
             <section className="cities__map map">
