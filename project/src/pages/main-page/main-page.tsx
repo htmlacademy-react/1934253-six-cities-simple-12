@@ -3,7 +3,7 @@ import Map from '../../components/map/map';
 import Cities from '../../components/cities-offers/cities-offers';
 import { useAppSelector } from '../../hooks/index';
 import { plural } from '../../const';
-import Filter from '../../components/sorting-filter/filter';
+import Sorting from '../../components/sorting/sorting';
 
 function getTextByCount(count: number, city: string): string {
   const pluralRules = plural.select(count);
@@ -18,7 +18,9 @@ function getTextByCount(count: number, city: string): string {
 const MainPages = () =>{
 
   const city = useAppSelector((state) => state.city);
-  const points = useAppSelector((state) => state.offers.filter((offer) => offer.city.name === state.city.name));
+  const points = useAppSelector((state) => state.nearestOffers);
+  const pointId = useAppSelector((state) => state.focusCardId);
+
   return (
 
     <main className="page__main page__main--index">
@@ -33,13 +35,11 @@ const MainPages = () =>{
           <section className="cities__places places">
             <h2 className="visually-hidden">Places</h2>
             <b className="places__found">{getTextByCount(points.length, city.name)}</b>
-            <Filter />
+            <Sorting />
             <ProductList offers={points} className='cities__places-list places__list tabs__content' />
           </section>
           <div className="cities__right-section">
-            <section className="cities__map map">
-              <Map city={city} offers={points} className='cities__map map' />
-            </section>
+            <Map city={city} offers={points} pointId={pointId} className='cities__map map' />
           </div>
         </div>
       </div>

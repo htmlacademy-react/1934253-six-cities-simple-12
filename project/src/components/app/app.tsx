@@ -2,37 +2,30 @@ import { Routes, Route } from 'react-router-dom';
 import MainPages from '../../pages/main-page/main-page';
 import { AppRoute, AuthorizationStatus } from '../../const';
 import LoginPage from '../../pages/login-page/login';
-import OfferScreen from '../../pages/property-page/offer';
+import OfferScreen from '../../pages/offer-page/offer-page';
 import ErrorPage from '../../pages/page-not-found/page-not-found';
 import Layout from '../layout/layout';
-import { OfferCards } from '../../types/offers';
 import { useAppSelector } from '../../hooks';
 import LoadingScreen from '../../pages/loading-screen/loading-screen';
 import HistoryRouter from '../history-router/history-router';
 import browserHistory from '../../browser-history';
+import ScrollUp from '../scroll-up/scroll-up';
 
+function App(): JSX.Element {
+  const authorization = useAppSelector((state) => state.authorizationStatus);
+  const isDataLoading = useAppSelector((state) => state.isDataLoadingStatus);
 
- type MainPageProps = {
-  offers: OfferCards;
-}
-
-
-function App({offers}: MainPageProps): JSX.Element {
-  const authorizationStatus = useAppSelector((state) =>
-    state.checkAuthorization);
-  const isDataLoading = useAppSelector((state) =>
-    state.isDataLoadingStatus);
-
-  if (authorizationStatus === AuthorizationStatus.Unknown || isDataLoading) {
+  if (authorization === AuthorizationStatus.Unknown || isDataLoading) {
     return <LoadingScreen />;
   }
   return (
     <HistoryRouter history={browserHistory}>
+      <ScrollUp />
       <Routes>
         <Route path={AppRoute.Main} element = {<Layout />}>
           <Route index element = {<MainPages />} />
-          <Route path={AppRoute.Login} element = {AuthorizationStatus.Auth ? <MainPages /> : <LoginPage />} />
-          <Route path={AppRoute.Offer} element = {<OfferScreen /*reviews = { reviews }*/ />} />
+          <Route path={AppRoute.Login} element = {<LoginPage />} />
+          <Route path={AppRoute.Offer} element = {<OfferScreen />} />
         </Route>
         <Route path='*' element={<ErrorPage/>} />
       </Routes>

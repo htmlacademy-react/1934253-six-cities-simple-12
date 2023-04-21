@@ -10,7 +10,7 @@ type CardProps = {
 
 const ProductCard = ({ offer }: CardProps) => {
   const { id, isPremium, previewImage, price, rating, title, type } = offer;
-  const ratingWidth = (rating / MAX_RATING) * 100;
+  const ratingWidth = Math.round((rating / MAX_RATING) * 100);
   const premium = isPremium ? <div className="place-card__mark"><span>Premium</span></div> : null;
   const dispatch = useAppDispatch();
 
@@ -19,7 +19,7 @@ const ProductCard = ({ offer }: CardProps) => {
       className="cities__card place-card"
       key={offer.id}
       onMouseEnter = {() => dispatch(selectCard(offer.id))}
-      onMouseLeave = {() => dispatch(selectCard(''))}
+      onMouseLeave = {() => dispatch(selectCard(0))}
     >
       {premium}
       <div className="cities__image-wrapper place-card__image-wrapper">

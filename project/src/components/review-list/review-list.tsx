@@ -1,6 +1,5 @@
 import { ReviewOfferCards } from '../../types/review';
 import Comment from '../review-card/comment';
-import ReviewForm from '../review/review';
 
 type CommentListProps = {
   reviews: ReviewOfferCards;
@@ -8,8 +7,8 @@ type CommentListProps = {
 
 const CommentList = ({reviews}: CommentListProps) => (
   <section className="property__reviews review">
+    <h2 className="reviews__title">review &middot; <span className="reviews__amount">{reviews.length}</span></h2>
     {reviews.map((review) => <Comment key={review.id} review = {review} />)}
-    <ReviewForm />
   </section>
 );
 

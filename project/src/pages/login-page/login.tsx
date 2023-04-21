@@ -1,7 +1,9 @@
-import { FormEvent, useRef } from 'react';
-import { useAppDispatch } from '../../hooks';
+import { FormEvent, useRef, useEffect } from 'react';
+import { AuthorizationStatus, AppRoute } from '../../const';
+import { useAppSelector, useAppDispatch } from '../../hooks';
 import { loginAction } from '../../store/api-action';
-import { AuthData } from '../../types/offers';
+import { redirectToRoute } from '../../store/action';
+
 
 const LoginPage = () => {
   const loginRef = useRef<HTMLInputElement | null>(null);
@@ -9,20 +11,25 @@ const LoginPage = () => {
 
   const dispatch = useAppDispatch();
 
-
-  const onSubmit = (authData: AuthData) => {
-    dispatch(loginAction(authData));
-  };
-
   const handleSubmit = (evt: FormEvent<HTMLFormElement>) => {
     evt.preventDefault();
     if (loginRef.current !== null && passwordRef.current !== null) {
-      onSubmit({
+      dispatch(loginAction({
         login: loginRef.current.value,
         password: passwordRef.current.value,
-      });
+      }));
     }
   };
+
+  const authorization = useAppSelector((state) => state.authorizationStatus);
+
+  useEffect(() => {
+    if (authorization === AuthorizationStatus.Auth) {
+      dispatch(redirectToRoute(AppRoute.Main));
+    }
+  }, [dispatch, authorization]);
+
+  const currentCity = useAppSelector((state) => state.city.name);
 
   return(
     <main className="page__main page__main--login">
@@ -62,9 +69,9 @@ const LoginPage = () => {
         </section>
         <section className="locations locations--login locations--current">
           <div className="locations__item">
-            {/* <a className="locations__item-link" href="#href"> */}
-            <span>Amsterdam</span>
-            {/* </a> */}
+            <a className="locations__item-link" href="#href">
+              <span>{currentCity}</span>
+            </a>
           </div>
         </section>
       </div>

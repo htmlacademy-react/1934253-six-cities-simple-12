@@ -5,7 +5,7 @@ import { AppRoute, AuthorizationStatus } from '../../const';
 import { logoutAction } from '../../store/api-action';
 
 const Header = () => {
-  const authStatus = useAppSelector((state) => state.checkAuthorization);
+  const userAuthorizationStatus = useAppSelector((state) => state.authorizationStatus);
   const dispatch = useAppDispatch();
   const email = useAppSelector((state) => state.email);
   return (
@@ -17,7 +17,7 @@ const Header = () => {
           </div>
           <nav className="header__nav">
             <ul className="header__nav-list">
-              {authStatus === AuthorizationStatus.Auth ?
+              {userAuthorizationStatus === AuthorizationStatus.Auth ?
                 <>
                   <li className="header__nav-item user">
                     <div className="header__nav-profile">
@@ -52,7 +52,8 @@ const Header = () => {
         </div>
       </div>
     </header>
-  );};
+  );
+};
 
 export default Header;
 

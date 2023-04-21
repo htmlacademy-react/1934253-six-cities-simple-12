@@ -7,11 +7,11 @@ export type State = ReturnType<typeof store.getState>;
 export type AppDispatch = typeof store.dispatch;
 
 export type initialStates = {
-  focusCardId: number | string;
+  focusCardId: number;
   nearestOffers: OfferCards;
   city: City;
   filterOffer: string;
-  checkAuthorization: AuthorizationStatus;
+  authorizationStatus: AuthorizationStatus;
   offers: OfferCards;
   error: null | string;
   isDataLoadingStatus: boolean;

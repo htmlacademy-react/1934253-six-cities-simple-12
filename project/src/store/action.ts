@@ -4,9 +4,7 @@ import { AppRoute, AuthorizationStatus } from '../const';
 
 export const changeCity = createAction<CityName>('offers/changeCity');
 
-export const fillOfferList = createAction<OfferCard>('offers/fillOfferList');
-
-export const selectCard = createAction<number | string>('offers/selectCard');
+export const selectCard = createAction<number>('offers/selectCard');
 
 export const filterOffers = createAction<string>('offer/filterOffer');
 
@@ -18,11 +16,11 @@ export const loadTargetOffer = createAction<OfferCard>('data/loadCurrentOffer');
 
 export const loadReviews = createAction<ReviewOfferCards>('data/loadReview');
 
-export const checkAuthorization = createAction<AuthorizationStatus>('user/checkAuthorization');
+export const authorizationStatus = createAction<AuthorizationStatus>('user/authorizationStatus');
 
 export const setError = createAction<string | null>('offers/setError');
 
-export const setDataLoadingStatus = createAction<boolean>('data/setQuestionsDataLoadingStatus');
+export const setDataLoadingStatus = createAction<boolean>('data/dataLoadingStatus');
 
 export const redirectToRoute = createAction<AppRoute>('offer/redirectToRoute');
 
