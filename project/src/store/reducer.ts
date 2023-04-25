@@ -1,7 +1,7 @@
 import { createReducer } from '@reduxjs/toolkit';
 // import { offers } from '../mock/offers';
-import { changeCity, selectCard, fillOfferList, filterOffers, loadOffers, checkAuthorization, setError, setDataLoadingStatus, setEmail, loadNearbyOffer, loadTargetOffer, loadReviews } from './action';
-import { defaultCity, filter, AuthorizationStatus } from '../const';
+import { changeCity, selectCard, filterOffers, loadOffers, authorizationStatus, setError, setDataLoadingStatus, setEmail, loadNearbyOffer, loadTargetOffer, loadReviews } from './action';
+import { defaultCity, sorting, AuthorizationStatus } from '../const';
 import { initialStates } from '../types/state';
 
 
@@ -9,10 +9,10 @@ export const initialState: initialStates = {
   city:  defaultCity,
   offers: [],
   nearestOffers: [],
-  focusCardId: '',
-  filterOffer: filter.popular,
+  focusCardId: 0,
+  filterOffer: sorting.popular,
   isDataLoadingStatus: false,
-  checkAuthorization: AuthorizationStatus.Unknown,
+  authorizationStatus: AuthorizationStatus.Unknown,
   error: null,
   email: '',
   nearbyOffers: [],
@@ -27,11 +27,7 @@ export const reducer = createReducer(initialState, (builder) => {
       state.city.location.latitude = action.payload.location.latitude;
       state.city.location.longitude = action.payload.location.longitude;
       state.nearestOffers = state.offers.filter((offer) => offer.city.name === state.city.name);
-      state.filterOffer = filter.popular;
-    })
-
-    .addCase(fillOfferList, (state, action) => {
-      state.nearestOffers = state.offers.filter((item) => item.city.name === state.city.name);
+      state.filterOffer = sorting.popular;
     })
 
     .addCase(selectCard, (state, action) => {
@@ -42,13 +38,13 @@ export const reducer = createReducer(initialState, (builder) => {
       state.filterOffer = action.payload;
 
       switch (state.filterOffer) {
-        case filter.high:
+        case sorting.high:
           state.nearestOffers = state.nearestOffers.sort((a, b) => b.price - a.price);
           break;
-        case filter.low:
+        case sorting.low:
           state.nearestOffers = state.nearestOffers.sort((a, b) => a.price - b.price);
           break;
-        case filter.top:
+        case sorting.top:
           state.nearestOffers = state.nearestOffers.sort((a, b) => b.rating - a.rating);
           break;
         default:
@@ -58,6 +54,7 @@ export const reducer = createReducer(initialState, (builder) => {
 
     .addCase(loadOffers, (state, action) => {
       state.offers = action.payload;
+      state.nearestOffers = state.offers.filter((item) => item.city.name === state.city.name);
     })
 
     .addCase(loadTargetOffer, (state, action) => {
@@ -70,14 +67,20 @@ export const reducer = createReducer(initialState, (builder) => {
 
     .addCase(loadReviews, (state, action) => {
       state.reviews = action.payload;
+      state.reviews = state.reviews.sort((a, b) => {
+        if (a.date < b.date) {
+          return 1;
+        }
+        return -1;
+      }).slice(0, 10);
     })
 
     .addCase(setDataLoadingStatus, (state, action) => {
       state.isDataLoadingStatus = action.payload;
     })
 
-    .addCase(checkAuthorization, (state, action) => {
-      state.checkAuthorization = action.payload;
+    .addCase(authorizationStatus, (state, action) => {
+      state.authorizationStatus = action.payload;
 
     })
 

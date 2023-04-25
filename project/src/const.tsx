@@ -1,7 +1,8 @@
 export enum AppRoute {
   Login = '/login',
   Main = '/',
-  Offer = '/offer/:id'
+  Offer = '/offer/:id',
+  NotFound = '*',
 }
 export const MAX_RATING = 5;
 
@@ -45,7 +46,6 @@ export const MarkerIcon = {
     Height: 40,
   }
 };
-
 
 export const defaultCity = {
   location: {
@@ -108,7 +108,7 @@ export const cities = [
   },
 ];
 
-export const filter = {
+export const sorting = {
   popular: 'Popular',
   low: 'Price: low to high',
   high: 'Price: high to low',

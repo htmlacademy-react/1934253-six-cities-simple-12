@@ -1,16 +1,23 @@
-import { ChangeEvent, Fragment, useState } from 'react';
+import { ChangeEvent, FormEvent, Fragment, useState } from 'react';
 import { RatingRewiev } from '../../const';
+import { useAppDispatch } from '../../hooks';
+import { sendReviewAction } from '../../store/api-action';
 
 const MIN_LENGTH_COMMENT = 50;
 const MAX_LENGTH_COMMENT = 300;
 
-const ReviewForm = () => {
+type Props = {
+  id: number;
+}
+
+const ReviewForm = ({id}: Props) => {
   const [stateInput, setStateInput] = useState({
     review: '',
     rating: 0
   });
 
   const inputChange = (event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    event.preventDefault();
     const {name, value} = event.target;
     setStateInput({...stateInput, [name]: value});
   };
@@ -21,8 +28,18 @@ const ReviewForm = () => {
     return isMinLength && isRated;
   };
 
+  const dispatch = useAppDispatch();
+
+  const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+
+    const payload = { ...stateInput, id };
+    dispatch(sendReviewAction(payload));
+    setStateInput({review: '', rating: 0});
+  };
+
   return (
-    <form className="reviews__form form" action="#" method="post">
+    <form className="reviews__form form" action="#" method="post" onSubmit={handleSubmit}>
       <label className="reviews__label form__label" htmlFor="review">Your review</label>
       <div className="reviews__rating-form form__rating">
         {RatingRewiev.map((mark) => (

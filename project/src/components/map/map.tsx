@@ -4,12 +4,12 @@ import { City, OfferCards } from '../../types/offers';
 import 'leaflet/dist/leaflet.css';
 import { MarkerIcon } from '../../const';
 import useMap from '../../hooks/useMap';
-import { useAppSelector } from '../../hooks';
 
 type MapProps = {
   city: City;
   className: string;
   offers: OfferCards;
+  pointId: number | null;
 }
 
 const defaultCustomIcon = new Icon ({
@@ -24,8 +24,7 @@ const currentCustomIcon = new Icon ({
   iconAnchor: [MarkerIcon.Size.Width, MarkerIcon.Size.Height],
 });
 
-const Map = ({city, offers, className}: MapProps) => {
-  const pointId = useAppSelector((state) => state.focusCardId);
+const Map = ({city, offers, pointId, className}: MapProps) => {
   const mapRef = useRef(null);
   const map = useMap(mapRef, city);
 
@@ -54,11 +53,9 @@ const Map = ({city, offers, className}: MapProps) => {
   }, [map, offers, pointId]);
   return (
     <section
-      className="className"
+      className={className}
       ref = {mapRef}
-      style={{height: '100%', minHeight: '500px'}}
     >
-
     </section>);
 };
 
