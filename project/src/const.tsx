@@ -47,7 +47,7 @@ export const MarkerIcon = {
   }
 };
 
-export const defaultCity = {
+export const DefaultCity = {
   location: {
     latitude: 48.8534100,
     longitude: 2.3488000,
@@ -108,7 +108,7 @@ export const cities = [
   },
 ];
 
-export const sorting = {
+export const SortingValue = {
   popular: 'Popular',
   low: 'Price: low to high',
   high: 'Price: high to low',
@@ -126,4 +126,10 @@ export enum APIRoute {
   Comments = '/comments',
   Login = '/login',
   LogOut = '/logout',
+}
+
+export enum NameSpace {
+  Data = 'DATA',
+  Offer = 'OFFER',
+  User = 'USER',
 }

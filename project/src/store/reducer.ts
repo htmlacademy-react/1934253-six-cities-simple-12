@@ -1,18 +1,16 @@
 import { createReducer } from '@reduxjs/toolkit';
-// import { offers } from '../mock/offers';
-import { changeCity, selectCard, filterOffers, loadOffers, authorizationStatus, setError, setDataLoadingStatus, setEmail, loadNearbyOffer, loadTargetOffer, loadReviews } from './action';
-import { defaultCity, sorting, AuthorizationStatus } from '../const';
+import { changeCity, selectCard, filterOffers, loadOffers, setError, setDataLoadingStatus, setEmail, loadNearbyOffer, loadTargetOffer, loadReviews } from './action';
+import { DefaultCity, SortingValue } from '../const';
 import { initialStates } from '../types/state';
 
 
 export const initialState: initialStates = {
-  city:  defaultCity,
+  city:  DefaultCity,
   offers: [],
   nearestOffers: [],
   focusCardId: 0,
-  filterOffer: sorting.popular,
+  filterOffer: SortingValue.popular,
   isDataLoadingStatus: false,
-  authorizationStatus: AuthorizationStatus.Unknown,
   error: null,
   email: '',
   nearbyOffers: [],
@@ -27,7 +25,7 @@ export const reducer = createReducer(initialState, (builder) => {
       state.city.location.latitude = action.payload.location.latitude;
       state.city.location.longitude = action.payload.location.longitude;
       state.nearestOffers = state.offers.filter((offer) => offer.city.name === state.city.name);
-      state.filterOffer = sorting.popular;
+      state.filterOffer = SortingValue.popular;
     })
 
     .addCase(selectCard, (state, action) => {
@@ -38,13 +36,13 @@ export const reducer = createReducer(initialState, (builder) => {
       state.filterOffer = action.payload;
 
       switch (state.filterOffer) {
-        case sorting.high:
+        case SortingValue.high:
           state.nearestOffers = state.nearestOffers.sort((a, b) => b.price - a.price);
           break;
-        case sorting.low:
+        case SortingValue.low:
           state.nearestOffers = state.nearestOffers.sort((a, b) => a.price - b.price);
           break;
-        case sorting.top:
+        case SortingValue.top:
           state.nearestOffers = state.nearestOffers.sort((a, b) => b.rating - a.rating);
           break;
         default:
@@ -77,11 +75,6 @@ export const reducer = createReducer(initialState, (builder) => {
 
     .addCase(setDataLoadingStatus, (state, action) => {
       state.isDataLoadingStatus = action.payload;
-    })
-
-    .addCase(authorizationStatus, (state, action) => {
-      state.authorizationStatus = action.payload;
-
     })
 
     .addCase(setError, (state, action) => {

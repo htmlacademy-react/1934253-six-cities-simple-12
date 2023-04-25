@@ -3,11 +3,12 @@ import { Link } from 'react-router-dom';
 import { useAppSelector, useAppDispatch } from '../../hooks';
 import { AppRoute, AuthorizationStatus } from '../../const';
 import { logoutAction } from '../../store/api-action';
+import { getAuthorizationStatus, getEmail } from '../../store/user-process/user-process.selector';
 
 const Header = () => {
-  const userAuthorizationStatus = useAppSelector((state) => state.authorizationStatus);
+  const userAuthorizationStatus = useAppSelector(getAuthorizationStatus);
   const dispatch = useAppDispatch();
-  const email = useAppSelector((state) => state.email);
+  const email = useAppSelector(getEmail);
   return (
     <header className="header">
       <div className="container">

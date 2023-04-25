@@ -2,7 +2,7 @@ import { Link } from 'react-router-dom';
 import { OfferCard } from '../../types/offers';
 import { MAX_RATING } from '../../const';
 import { useAppDispatch } from '../../hooks';
-import { selectCard } from '../../store/action';
+import { selectCard } from '../../store/offers/offers.slice';
 
 type CardProps = {
   offer: OfferCard;

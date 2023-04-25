@@ -1,6 +1,6 @@
 import { createAction } from '@reduxjs/toolkit';
 import { OfferCard, CityName, OfferCards, ReviewOfferCards } from '../types/offers';
-import { AppRoute, AuthorizationStatus } from '../const';
+import { AppRoute } from '../const';
 
 export const changeCity = createAction<CityName>('offers/changeCity');
 
@@ -15,8 +15,6 @@ export const loadNearbyOffer = createAction<OfferCards>('data/loadNearbyOffers')
 export const loadTargetOffer = createAction<OfferCard>('data/loadCurrentOffer');
 
 export const loadReviews = createAction<ReviewOfferCards>('data/loadReview');
-
-export const authorizationStatus = createAction<AuthorizationStatus>('user/authorizationStatus');
 
 export const setError = createAction<string | null>('offers/setError');
 

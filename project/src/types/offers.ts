@@ -41,6 +41,7 @@ export type CityName = {
   'location': {
     'latitude': number;
     'longitude': number;
+    'zoom': number;
   };
 }
 
@@ -71,3 +72,5 @@ export type ReviewOfferCard = {
 };
 
 export type ReviewOfferCards = ReviewOfferCard[];
+
+export type OfferGroup = (OfferCard | OfferCards | ReviewOfferCards) [];

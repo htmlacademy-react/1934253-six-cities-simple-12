@@ -10,10 +10,12 @@ import LoadingScreen from '../../pages/loading-screen/loading-screen';
 import HistoryRouter from '../history-router/history-router';
 import browserHistory from '../../browser-history';
 import ScrollUp from '../scroll-up/scroll-up';
+import { getAuthorizationStatus } from '../../store/user-process/user-process.selector';
+import { getDataLoadingStatus } from '../../store/data/data.selector';
 
 function App(): JSX.Element {
-  const authorization = useAppSelector((state) => state.authorizationStatus);
-  const isDataLoading = useAppSelector((state) => state.isDataLoadingStatus);
+  const authorization = useAppSelector(getAuthorizationStatus);
+  const isDataLoading = useAppSelector(getDataLoadingStatus);
 
   if (authorization === AuthorizationStatus.Unknown || isDataLoading) {
     return <LoadingScreen />;

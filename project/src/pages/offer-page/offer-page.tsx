@@ -8,15 +8,18 @@ import ReviewForm from '../../components/review/review';
 import { AuthorizationStatus } from '../../const';
 import LoadingScreen from '../loading-screen/loading-screen';
 import { useParams } from 'react-router-dom';
-import ErrorPage from '../page-not-found/page-not-found';
+// import ErrorPage from '../page-not-found/page-not-found';
+import { getNearbyOffers, getCurrentOffer, getReviews } from '../../store/data/data.selector';
+import { getAuthorizationStatus } from '../../store/user-process/user-process.selector';
+import { getSelectCardId } from '../../store/offers/offers.selector';
 
 const OfferScreen = (): JSX.Element => {
-  const targetOffer = useAppSelector((state) => state.targetOffer);
-  const nearbyOffer = useAppSelector((state) => state.nearbyOffers);
-  const reviews = useAppSelector((state) => state.reviews);
-  const errorStatus = useAppSelector((state) => state.error);
-  const offerId = useAppSelector((state) => state.focusCardId);
-  const userStatus = useAppSelector((state) => state.authorizationStatus);
+  const targetOffer = useAppSelector(getCurrentOffer);
+  const nearbyOffer = useAppSelector(getNearbyOffers);
+  const reviews = useAppSelector(getReviews);
+  // const errorStatus = useAppSelector((state) => state.error);
+  const offerId = useAppSelector(getSelectCardId);
+  const userStatus = useAppSelector(getAuthorizationStatus);
 
   const dispatch = useAppDispatch();
   const {id} = useParams();
@@ -27,11 +30,11 @@ const OfferScreen = (): JSX.Element => {
     }
   }, [dispatch, id]);
 
-  if (errorStatus) {
-    return <ErrorPage />;
-  }
+  // if (errorStatus) {
+  //   return <ErrorPage />;
+  // }
 
-  if (targetOffer && targetOffer !== null) {
+  if (targetOffer !== null) {
 
     const offersHotels = nearbyOffer.concat(targetOffer);
     const rating = Math.round((targetOffer.rating * 10));

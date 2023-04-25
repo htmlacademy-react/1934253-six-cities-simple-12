@@ -11,7 +11,6 @@ export type initialStates = {
   nearestOffers: OfferCards;
   city: City;
   filterOffer: string;
-  authorizationStatus: AuthorizationStatus;
   offers: OfferCards;
   error: null | string;
   isDataLoadingStatus: boolean;
@@ -19,4 +18,27 @@ export type initialStates = {
   nearbyOffers: OfferCards;
   targetOffer: OfferCard | null;
   reviews: ReviewOfferCards;
+}
+
+export type UserProcess = {
+  authorizationStatus: AuthorizationStatus;
+  email: string;
+}
+
+export type Data = {
+  isDataLoadingStatus: boolean;
+  offers: OfferCards;
+  error: null | string;
+  nearbyOffers: OfferCards;
+  currentOffer: OfferCard | null;
+  reviews: ReviewOfferCards;
+  nearestOffers: OfferCards;
+  city: City;
+  sortingValue: string;
+}
+
+export type Offers = {
+  city: City;
+  sortingValue: string;
+  selectCardId: number;
 }
