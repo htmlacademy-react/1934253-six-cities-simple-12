@@ -29,7 +29,7 @@ const Map = ({city, offers, pointId, className}: MapProps) => {
   const map = useMap(mapRef, city);
 
   useEffect(() => {
-    if (map) {
+    if (map && pointId !== null) {
       const markers = offers.map(
         (point) =>
           new Marker(

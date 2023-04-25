@@ -7,10 +7,10 @@ import { initialStates } from '../types/state';
 export const initialState: initialStates = {
   city:  DefaultCity,
   offers: [],
-  nearestOffers: [],
+  cityOffers: [],
   focusCardId: 0,
   filterOffer: SortingValue.popular,
-  isDataLoadingStatus: false,
+  isLoading: false,
   error: null,
   email: '',
   nearbyOffers: [],
@@ -24,7 +24,7 @@ export const reducer = createReducer(initialState, (builder) => {
       state.city.name = action.payload.name;
       state.city.location.latitude = action.payload.location.latitude;
       state.city.location.longitude = action.payload.location.longitude;
-      state.nearestOffers = state.offers.filter((offer) => offer.city.name === state.city.name);
+      state.cityOffers = state.offers.filter((offer) => offer.city.name === state.city.name);
       state.filterOffer = SortingValue.popular;
     })
 
@@ -37,22 +37,22 @@ export const reducer = createReducer(initialState, (builder) => {
 
       switch (state.filterOffer) {
         case SortingValue.high:
-          state.nearestOffers = state.nearestOffers.sort((a, b) => b.price - a.price);
+          state.cityOffers = state.cityOffers.sort((a, b) => b.price - a.price);
           break;
         case SortingValue.low:
-          state.nearestOffers = state.nearestOffers.sort((a, b) => a.price - b.price);
+          state.cityOffers = state.cityOffers.sort((a, b) => a.price - b.price);
           break;
         case SortingValue.top:
-          state.nearestOffers = state.nearestOffers.sort((a, b) => b.rating - a.rating);
+          state.cityOffers = state.cityOffers.sort((a, b) => b.rating - a.rating);
           break;
         default:
-          state.nearestOffers = state.offers.filter((offer) => (offer.city.name === state.city.name));
+          state.cityOffers = state.offers.filter((offer) => (offer.city.name === state.city.name));
       }
     })
 
     .addCase(loadOffers, (state, action) => {
       state.offers = action.payload;
-      state.nearestOffers = state.offers.filter((item) => item.city.name === state.city.name);
+      state.cityOffers = state.offers.filter((item) => item.city.name === state.city.name);
     })
 
     .addCase(loadTargetOffer, (state, action) => {
@@ -74,7 +74,7 @@ export const reducer = createReducer(initialState, (builder) => {
     })
 
     .addCase(setDataLoadingStatus, (state, action) => {
-      state.isDataLoadingStatus = action.payload;
+      state.isLoading = action.payload;
     })
 
     .addCase(setError, (state, action) => {

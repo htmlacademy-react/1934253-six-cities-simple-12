@@ -11,7 +11,7 @@ import { useParams } from 'react-router-dom';
 // import ErrorPage from '../page-not-found/page-not-found';
 import { getNearbyOffers, getCurrentOffer, getReviews } from '../../store/data/data.selector';
 import { getAuthorizationStatus } from '../../store/user-process/user-process.selector';
-import { getSelectCardId } from '../../store/offers/offers.selector';
+import { getSelectCardId } from '../../store/data/data.selector';
 
 const OfferScreen = (): JSX.Element => {
   const targetOffer = useAppSelector(getCurrentOffer);
@@ -45,8 +45,8 @@ const OfferScreen = (): JSX.Element => {
           <div className="property__gallery-container container">
             <div className="property__gallery">
               {targetOffer.images.slice(0,6).map((el) => (
-                <div key={el.split('/')[5]} className="property__image-wrapper">
-                  <img key={el} className="property__image" src={el} alt="Studio" />
+                <div key={el} className="property__image-wrapper">
+                  <img className="property__image" src={el} alt="Studio" />
                 </div>)
               )}
             </div>
@@ -117,7 +117,7 @@ const OfferScreen = (): JSX.Element => {
               </div>
               <section className="property__reviews reviews">
                 <CommentList reviews={reviews}/>
-                {userStatus === AuthorizationStatus.Auth ? <ReviewForm id={offerId} /> : null}
+                {userStatus === AuthorizationStatus.Auth ? <ReviewForm id={offerId} /> : 0}
               </section>
             </div>
           </div>

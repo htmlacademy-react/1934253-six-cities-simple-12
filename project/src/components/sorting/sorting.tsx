@@ -2,17 +2,17 @@ import { useState } from 'react';
 import classNames from 'classnames';
 import { useAppDispatch, useAppSelector } from '../../hooks';
 import { SortingValue } from '../../const';
-import { sortingOffers } from '../../store/data/data.slice';
-import { getSortingValue } from '../../store/offers/offers.selector';
+import { setSorting } from '../../store/data/data.slice';
+import { getSortingValue } from '../../store/data/data.selector';
 
 const Sorting = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const dispatch = useAppDispatch();
+  const filter = useAppSelector(getSortingValue);
 
   const handleFilterChange = () => {
     setIsOpen(!isOpen);
   };
-  const dispatch = useAppDispatch();
-  const filter = useAppSelector(getSortingValue);
   return (
     <form className="places__sorting" action="#" method="get">
       <span className="places__sorting-caption">Sort by</span>
@@ -34,7 +34,7 @@ const Sorting = () => {
               key={element}
               className={classNames('places__option', { 'places__option--active': filter === element })}
               tabIndex={0}
-              onClick = {() => { dispatch(sortingOffers(element)); setIsOpen(!isOpen);}}
+              onClick = {() => { dispatch(setSorting(element)); setIsOpen(!isOpen);}}
             >
               {element}
             </li>))}

@@ -8,12 +8,12 @@ export type AppDispatch = typeof store.dispatch;
 
 export type initialStates = {
   focusCardId: number;
-  nearestOffers: OfferCards;
+  cityOffers: OfferCards;
   city: City;
   filterOffer: string;
   offers: OfferCards;
   error: null | string;
-  isDataLoadingStatus: boolean;
+  isLoading: boolean;
   email: string;
   nearbyOffers: OfferCards;
   targetOffer: OfferCard | null;
@@ -22,19 +22,10 @@ export type initialStates = {
 
 export type UserProcess = {
   authorizationStatus: AuthorizationStatus;
-  email: string;
-}
-
-export type Data = {
-  isDataLoadingStatus: boolean;
-  offers: OfferCards;
-  error: null | string;
-  nearbyOffers: OfferCards;
-  currentOffer: OfferCard | null;
-  reviews: ReviewOfferCards;
-  nearestOffers: OfferCards;
-  city: City;
-  sortingValue: string;
+  userData: {
+    email: string;
+    avatarUrl: string;
+  };
 }
 
 export type Offers = {

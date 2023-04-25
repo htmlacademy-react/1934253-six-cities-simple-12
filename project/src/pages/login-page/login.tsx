@@ -4,7 +4,7 @@ import { useAppSelector, useAppDispatch } from '../../hooks';
 import { loginAction } from '../../store/api-action';
 import { redirectToRoute } from '../../store/action';
 import { getAuthorizationStatus } from '../../store/user-process/user-process.selector';
-import { getCity } from '../../store/offers/offers.selector';
+import { getCity } from '../../store/data/data.selector';
 
 
 const LoginPage = () => {

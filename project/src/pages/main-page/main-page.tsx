@@ -5,8 +5,8 @@ import { useAppSelector } from '../../hooks/index';
 import { plural } from '../../const';
 import Sorting from '../../components/sorting/sorting';
 import { getCity } from '../../store/data/data.selector';
-import { getSelectCardId } from '../../store/offers/offers.selector';
-import { getNearestOffers } from '../../store/data/data.selector';
+import { getSelectCardId } from '../../store/data/data.selector';
+import { getCityOffers } from '../../store/data/data.selector';
 
 function getTextByCount(count: number, city: string): string {
   const pluralRules = plural.select(count);
@@ -21,7 +21,7 @@ function getTextByCount(count: number, city: string): string {
 const MainPages = () =>{
 
   const city = useAppSelector(getCity);
-  const points = useAppSelector(getNearestOffers)/*.filter((offer) => offer.city.name === city.name)*/;
+  const points = useAppSelector(getCityOffers);
   const pointId = useAppSelector(getSelectCardId);
 
   return (

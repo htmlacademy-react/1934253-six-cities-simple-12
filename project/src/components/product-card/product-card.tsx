@@ -2,7 +2,7 @@ import { Link } from 'react-router-dom';
 import { OfferCard } from '../../types/offers';
 import { MAX_RATING } from '../../const';
 import { useAppDispatch } from '../../hooks';
-import { selectCard } from '../../store/offers/offers.slice';
+import { selectCard } from '../../store/data/data.slice';
 
 type CardProps = {
   offer: OfferCard;
@@ -10,9 +10,9 @@ type CardProps = {
 
 const ProductCard = ({ offer }: CardProps) => {
   const { id, isPremium, previewImage, price, rating, title, type } = offer;
+  const dispatch = useAppDispatch();
   const ratingWidth = Math.round((rating / MAX_RATING) * 100);
   const premium = isPremium ? <div className="place-card__mark"><span>Premium</span></div> : null;
-  const dispatch = useAppDispatch();
 
   return (
     <article
