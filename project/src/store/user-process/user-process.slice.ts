@@ -1,4 +1,3 @@
-/* eslint-disable no-console */
 import { createSlice } from '@reduxjs/toolkit';
 import { NameSpace, AuthorizationStatus } from '../../const';
 import { UserProcess } from '../../types/state';

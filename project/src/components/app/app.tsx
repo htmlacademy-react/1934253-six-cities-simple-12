@@ -1,7 +1,7 @@
 import { Routes, Route } from 'react-router-dom';
 import MainPages from '../../pages/main-page/main-page';
 import { AppRoute, AuthorizationStatus } from '../../const';
-import LoginPage from '../../pages/login-page/login';
+import LoginPage from '../../pages/login-page/login-page';
 import OfferScreen from '../../pages/offer-page/offer-page';
 import ErrorPage from '../../pages/page-not-found/page-not-found';
 import Layout from '../layout/layout';

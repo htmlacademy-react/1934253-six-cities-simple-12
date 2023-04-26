@@ -10,7 +10,7 @@ export const plural = new Intl.PluralRules('en-US');
 
 export const TIMEOUT_SHOW_ERROR = 2000;
 
-export const RatingRewiev = [
+export const RatingRewievs = [
   {
     id: 5,
     value: 5,
