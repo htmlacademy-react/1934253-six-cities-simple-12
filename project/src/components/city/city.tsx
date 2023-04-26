@@ -1,5 +1,6 @@
 import { useAppDispatch, useAppSelector } from '../../hooks';
-import { changeCity } from '../../store/action';
+import { changeCity } from '../../store/data/data.slice';
+import { getCity } from '../../store/data/data.selector';
 import { CityName } from '../../types/offers';
 
 type Prop ={
@@ -7,7 +8,7 @@ type Prop ={
 }
 
 const City = ({city} :Prop) => {
-  const activeCity = useAppSelector((state) => state.city.name);
+  const activeCity = useAppSelector(getCity).name;
   const dispatch = useAppDispatch();
   return (
     <a className={`locations__item-link tabs__item ${city.name === activeCity ? 'tabs__item--active' : ''}` } onClick ={() => dispatch(changeCity(city))} href='#href'>

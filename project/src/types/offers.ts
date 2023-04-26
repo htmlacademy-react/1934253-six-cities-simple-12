@@ -41,6 +41,7 @@ export type CityName = {
   'location': {
     'latitude': number;
     'longitude': number;
+    'zoom': number;
   };
 }
 
@@ -55,6 +56,7 @@ export type UserData = {
   id: number;
   email: string;
   token: string;
+  avatarUrl: string;
 };
 
 export type ReviewOfferCard = {
@@ -70,4 +72,19 @@ export type ReviewOfferCard = {
   date: string;
 };
 
+export type CommentData = {
+  id: number;
+  rating: number;
+  review: string;
+}
+
+export type CommentFormData = {
+  rating: number;
+  comment: string;
+}
+
+export type Comments = Comment[];
+
 export type ReviewOfferCards = ReviewOfferCard[];
+
+export type OfferGroup = (OfferCard | OfferCards | ReviewOfferCards) [];

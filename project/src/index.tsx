@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom/client';
 import { Provider } from 'react-redux';
 import { store } from './store/index';
 import App from './components/app/app';
-import ErrorMessage from './components/error-message/error-message';
+// import ErrorMessage from './components/error-message/error-message';
 import { checkAuthAction, fetchOffersAction } from './store/api-action';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -18,7 +18,7 @@ const root = ReactDOM.createRoot(
 root.render(
   <React.StrictMode>
     <Provider store = {store}>
-      <ErrorMessage />
+      {/* <ErrorMessage /> */}
       <ToastContainer />
       <App/>
     </Provider>

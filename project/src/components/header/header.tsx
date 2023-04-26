@@ -3,11 +3,12 @@ import { Link } from 'react-router-dom';
 import { useAppSelector, useAppDispatch } from '../../hooks';
 import { AppRoute, AuthorizationStatus } from '../../const';
 import { logoutAction } from '../../store/api-action';
+import { getAuthorizationStatus, getEmail } from '../../store/user-process/user-process.selector';
 
 const Header = () => {
-  const userAuthorizationStatus = useAppSelector((state) => state.authorizationStatus);
+  const userAuthorizationStatus = useAppSelector(getAuthorizationStatus);
   const dispatch = useAppDispatch();
-  const email = useAppSelector((state) => state.email);
+  const email = useAppSelector(getEmail);
   return (
     <header className="header">
       <div className="container">
@@ -21,8 +22,8 @@ const Header = () => {
                 <>
                   <li className="header__nav-item user">
                     <div className="header__nav-profile">
-                      <div className="header__avatar-wrapper user__avatar-wrapper"></div>
-                      <span className="header__user-name user__name">{email}</span>
+                      {email ? <img className="header__avatar-wrapper user__avatar-wrapper" src={email.avatarUrl} alt='user' /> : <div className="header__avatar-wrapper user__avatar-wrapper" />}
+                      <span className="header__user-name user__name">{email.email}</span>
                     </div>
                   </li>
                   <li className="header__nav-item">

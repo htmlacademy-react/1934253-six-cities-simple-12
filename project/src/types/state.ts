@@ -8,15 +8,28 @@ export type AppDispatch = typeof store.dispatch;
 
 export type initialStates = {
   focusCardId: number;
-  nearestOffers: OfferCards;
+  cityOffers: OfferCards;
   city: City;
   filterOffer: string;
-  authorizationStatus: AuthorizationStatus;
   offers: OfferCards;
   error: null | string;
-  isDataLoadingStatus: boolean;
+  isLoading: boolean;
   email: string;
   nearbyOffers: OfferCards;
   targetOffer: OfferCard | null;
   reviews: ReviewOfferCards;
+}
+
+export type UserProcess = {
+  authorizationStatus: AuthorizationStatus;
+  userData: {
+    email: string;
+    avatarUrl: string;
+  };
+}
+
+export type Offers = {
+  city: City;
+  sortingValue: string;
+  selectCardId: number;
 }

@@ -3,6 +3,8 @@ import { AuthorizationStatus, AppRoute } from '../../const';
 import { useAppSelector, useAppDispatch } from '../../hooks';
 import { loginAction } from '../../store/api-action';
 import { redirectToRoute } from '../../store/action';
+import { getAuthorizationStatus } from '../../store/user-process/user-process.selector';
+import { getCity } from '../../store/data/data.selector';
 
 
 const LoginPage = () => {
@@ -21,7 +23,7 @@ const LoginPage = () => {
     }
   };
 
-  const authorization = useAppSelector((state) => state.authorizationStatus);
+  const authorization = useAppSelector(getAuthorizationStatus);
 
   useEffect(() => {
     if (authorization === AuthorizationStatus.Auth) {
@@ -29,7 +31,7 @@ const LoginPage = () => {
     }
   }, [dispatch, authorization]);
 
-  const currentCity = useAppSelector((state) => state.city.name);
+  const currentCity = useAppSelector(getCity).name;
 
   return(
     <main className="page__main page__main--login">

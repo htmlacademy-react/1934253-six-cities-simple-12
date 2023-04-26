@@ -1,17 +1,18 @@
 import { useState } from 'react';
 import classNames from 'classnames';
-import { filterOffers } from '../../store/action';
 import { useAppDispatch, useAppSelector } from '../../hooks';
-import { sorting } from '../../const';
+import { SortingValue } from '../../const';
+import { setSorting } from '../../store/data/data.slice';
+import { getSortingValue } from '../../store/data/data.selector';
 
 const Sorting = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const dispatch = useAppDispatch();
+  const filter = useAppSelector(getSortingValue);
 
   const handleFilterChange = () => {
     setIsOpen(!isOpen);
   };
-  const dispatch = useAppDispatch();
-  const filter = useAppSelector((state) => state.filterOffer);
   return (
     <form className="places__sorting" action="#" method="get">
       <span className="places__sorting-caption">Sort by</span>
@@ -27,13 +28,13 @@ const Sorting = () => {
       <ul
         className={classNames('places__options ', 'places__options--custom', { 'places__options--opened': isOpen === true })}
       >
-        {Object.values(sorting).map((element: string) =>
+        {Object.values(SortingValue).map((element: string) =>
           (
             <li
               key={element}
               className={classNames('places__option', { 'places__option--active': filter === element })}
               tabIndex={0}
-              onClick = {() => { dispatch(filterOffers(element)); setIsOpen(!isOpen);}}
+              onClick = {() => { dispatch(setSorting(element)); setIsOpen(!isOpen);}}
             >
               {element}
             </li>))}
