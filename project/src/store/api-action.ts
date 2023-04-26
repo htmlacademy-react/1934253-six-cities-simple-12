@@ -1,7 +1,7 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { AppDispatch, State } from '../types/state.js';
 import { AxiosInstance } from 'axios';
-import { AuthData, OfferCards, OfferCard, UserData, ReviewOfferCards, ReviewOfferCard, OfferGroup } from '../types/offers';
+import { AuthData, OfferCards, OfferCard, UserData, ReviewOfferCards, ReviewOfferCard, OffersGroup } from '../types/offers';
 import { APIRoute, TIMEOUT_SHOW_ERROR } from '../const';
 import { setError } from './data/data.slice';
 import { saveToken, dropToken } from '../services/token';
@@ -30,7 +30,7 @@ export const fetchOffersAction = createAsyncThunk<OfferCards, undefined, {
   }
 );
 
-export const fetchCurrentOffersAction = createAsyncThunk<OfferGroup, number, {
+export const fetchCurrentOffersAction = createAsyncThunk<OffersGroup, number, {
   dispatch: AppDispatch;
   state: State;
   extra: AxiosInstance;

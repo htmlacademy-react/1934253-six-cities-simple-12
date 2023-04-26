@@ -1,5 +1,5 @@
 import { ReviewOfferCards } from '../../types/review';
-import Comment from '../review-card/comment';
+import Comment from '../review-card/review-card';
 
 type CommentListProps = {
   reviews: ReviewOfferCards;
