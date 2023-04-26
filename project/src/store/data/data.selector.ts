@@ -8,7 +8,7 @@ export const getCurrentOffer = (state: State): OfferCard | null => state[NameSpa
 export const getNearbyOffers = (state: State): OfferCards => state[NameSpace.Data].offer.nearbyOffers;
 export const getReviews = (state: State): ReviewOfferCards => state[NameSpace.Data].reviews;
 export const getCityOffers = (state: State): OfferCards => state[NameSpace.Data].offerList.cityOffers;
-// export const getError = (state: State) => state[NameSpace.Data].error;
+export const getError = (state: State) => state[NameSpace.Data].offer.error;
 export const getCity = (state: State): City => state[NameSpace.Data].city;
 export const getSortingValue = (state: State) => state[NameSpace.Data].sortingValue;
 export const getSelectCardId = (state: State) => state[NameSpace.Data].selectCardId;

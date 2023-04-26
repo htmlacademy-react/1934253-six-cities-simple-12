@@ -3,7 +3,7 @@ import { AppDispatch, State } from '../types/state.js';
 import { AxiosInstance } from 'axios';
 import { AuthData, OfferCards, OfferCard, UserData, ReviewOfferCards, ReviewOfferCard, OfferGroup } from '../types/offers';
 import { APIRoute, TIMEOUT_SHOW_ERROR } from '../const';
-import { setError } from './action';
+import { setError } from './data/data.slice';
 import { saveToken, dropToken } from '../services/token';
 import { store } from './index';
 
@@ -30,19 +30,22 @@ export const fetchOffersAction = createAsyncThunk<OfferCards, undefined, {
   }
 );
 
-export const fetchCurrentOffersAction = createAsyncThunk<OfferGroup, string, {
+export const fetchCurrentOffersAction = createAsyncThunk<OfferGroup, number, {
   dispatch: AppDispatch;
   state: State;
   extra: AxiosInstance;
 }>(
-  'data/fetchNearbyOffers',
+  'data/fetchCurrentOfferData',
   async (id, { extra: api }) => {
     const [currentOffer, nearbyOffers, comments] = await Promise.all([
       api.get<OfferCard>(`${APIRoute.Offers}/${id}`),
       api.get<OfferCards>(`${APIRoute.Offers}/${id}/nearby`),
       api.get<ReviewOfferCards>(`${APIRoute.Comments}/${id}`),
     ]);
-    return [currentOffer.data, nearbyOffers.data, comments.data];
+    if (typeof currentOffer.data.id === 'number') {
+      return [currentOffer.data, nearbyOffers.data, comments.data];
+    }
+    return [];
   }
 );
 
@@ -73,7 +76,7 @@ export const loginAction = createAsyncThunk<string[], AuthData, {
 
 export const sendReviewAction = createAsyncThunk<ReviewOfferCards,
   {
-    id: OfferCard['id'] | 0;
+    id: ReviewOfferCard['id'];
     review: ReviewOfferCard['comment'];
     rating: ReviewOfferCard['rating'];
   },
@@ -84,12 +87,12 @@ export const sendReviewAction = createAsyncThunk<ReviewOfferCards,
   }
 >(
   'data/sendReview',
-  async ({ review, rating, id }, { extra: api }) => {
-    const { data } = await api.post<ReviewOfferCards>(
+  async ({id, review: comment, rating }, { extra: api }) => {
+    const userComment = await api.post<ReviewOfferCards>(
       `${APIRoute.Comments}/${id}`,
-      { review, rating }
+      { comment, rating }
     );
-    return data;
+    return userComment.data;
   }
 );
 

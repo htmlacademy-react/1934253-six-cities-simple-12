@@ -22,7 +22,7 @@ const Header = () => {
                 <>
                   <li className="header__nav-item user">
                     <div className="header__nav-profile">
-                      <img className="header__avatar-wrapper user__avatar-wrapper" src={email.avatarUrl} alt='user' />
+                      {email ? <img className="header__avatar-wrapper user__avatar-wrapper" src={email.avatarUrl} alt='user' /> : <div className="header__avatar-wrapper user__avatar-wrapper" />}
                       <span className="header__user-name user__name">{email.email}</span>
                     </div>
                   </li>

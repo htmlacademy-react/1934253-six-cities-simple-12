@@ -5,20 +5,19 @@ import { useAppSelector, useAppDispatch } from '../../hooks';
 import { useEffect } from 'react';
 import { fetchCurrentOffersAction, } from '../../store/api-action';
 import ReviewForm from '../../components/review/review';
-import { AuthorizationStatus } from '../../const';
+import { AppRoute, AuthorizationStatus } from '../../const';
 import LoadingScreen from '../loading-screen/loading-screen';
 import { useParams } from 'react-router-dom';
-// import ErrorPage from '../page-not-found/page-not-found';
-import { getNearbyOffers, getCurrentOffer, getReviews } from '../../store/data/data.selector';
+import { getNearbyOffers, getCurrentOffer, getReviews, getError } from '../../store/data/data.selector';
 import { getAuthorizationStatus } from '../../store/user-process/user-process.selector';
-import { getSelectCardId } from '../../store/data/data.selector';
+import { redirectToRoute } from '../../store/action';
+import { StatusCodes } from 'http-status-codes';
 
 const OfferScreen = (): JSX.Element => {
   const targetOffer = useAppSelector(getCurrentOffer);
   const nearbyOffer = useAppSelector(getNearbyOffers);
   const reviews = useAppSelector(getReviews);
-  // const errorStatus = useAppSelector((state) => state.error);
-  const offerId = useAppSelector(getSelectCardId);
+  const errorStatus = useAppSelector(getError);
   const userStatus = useAppSelector(getAuthorizationStatus);
 
   const dispatch = useAppDispatch();
@@ -26,15 +25,15 @@ const OfferScreen = (): JSX.Element => {
 
   useEffect(() => {
     if (id) {
-      dispatch(fetchCurrentOffersAction(id));
+      dispatch(fetchCurrentOffersAction(Number(id)));
     }
   }, [dispatch, id]);
 
-  // if (errorStatus) {
-  //   return <ErrorPage />;
-  // }
+  if (errorStatus === StatusCodes.NOT_FOUND.toString()) {
+    dispatch(redirectToRoute(AppRoute.NotFound));
+  }
 
-  if (targetOffer !== null) {
+  if (targetOffer && targetOffer !== null) {
 
     const offersHotels = nearbyOffer.concat(targetOffer);
     const rating = Math.round((targetOffer.rating * 10));
@@ -117,7 +116,7 @@ const OfferScreen = (): JSX.Element => {
               </div>
               <section className="property__reviews reviews">
                 <CommentList reviews={reviews}/>
-                {userStatus === AuthorizationStatus.Auth ? <ReviewForm id={offerId} /> : 0}
+                {userStatus === AuthorizationStatus.Auth ? <ReviewForm id={targetOffer.id} /> : null}
               </section>
             </div>
           </div>

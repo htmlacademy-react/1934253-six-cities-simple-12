@@ -72,6 +72,19 @@ export type ReviewOfferCard = {
   date: string;
 };
 
+export type CommentData = {
+  id: number;
+  rating: number;
+  review: string;
+}
+
+export type CommentFormData = {
+  rating: number;
+  comment: string;
+}
+
+export type Comments = Comment[];
+
 export type ReviewOfferCards = ReviewOfferCard[];
 
 export type OfferGroup = (OfferCard | OfferCards | ReviewOfferCards) [];

@@ -17,7 +17,6 @@ const ReviewForm = ({id}: Props) => {
   });
 
   const inputChange = (event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    event.preventDefault();
     const {name, value} = event.target;
     setStateInput({...stateInput, [name]: value});
   };
@@ -27,8 +26,8 @@ const ReviewForm = ({id}: Props) => {
     const isRated = stateInput.rating > 0;
     return isMinLength && isRated;
   };
-
   const dispatch = useAppDispatch();
+
 
   const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();

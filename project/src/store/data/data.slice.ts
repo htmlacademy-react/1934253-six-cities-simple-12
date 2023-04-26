@@ -1,16 +1,16 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { redirect } from 'react-router-dom';
-import { AppRoute, NameSpace } from '../../const';
+import { NameSpace } from '../../const';
 import { City, OfferCard, OfferCards, ReviewOfferCards } from '../../types/offers';
 import { fetchCurrentOffersAction, fetchOffersAction, sendReviewAction } from '../api-action';
 import { DefaultCity, SortingValue } from '../../const';
+import { StatusCodes } from 'http-status-codes';
 
 
 type State = {
 
   offer: {
     isLoading: boolean;
-    error: null | string;
+    error: string;
     data: OfferCard | null;
     nearbyOffers: OfferCards;
   };
@@ -29,7 +29,7 @@ type State = {
 const initialState: State = {
   offer: {
     isLoading: false,
-    error: null,
+    error: '',
     data: null, // currentOffer
     nearbyOffers: [],
   },
@@ -75,6 +75,9 @@ export const dataLoading = createSlice({
     selectCard: (state, action) => {
       state.selectCardId = action.payload as number;
     },
+    setError: (state, action) => {
+      state.offer.error = action.payload as string;
+    },
   },
   extraReducers(builder) {
     builder
@@ -96,28 +99,25 @@ export const dataLoading = createSlice({
         const [currentOffer, nearbyOffers, comments] = action.payload;
         state.offer.data = currentOffer as OfferCard;
         state.offer.nearbyOffers = nearbyOffers as OfferCards;
-        state.reviews = (comments as ReviewOfferCards).sort((a, b) => {
+        state.reviews = (comments as ReviewOfferCards);
+        state.offer.isLoading = false;
+      })
+
+      .addCase(fetchCurrentOffersAction.rejected, (state, action) => {
+        if (state.reviews === null ) {
+          state.offer.error = StatusCodes.NOT_FOUND.toString();
+        }
+      })
+
+      .addCase(sendReviewAction.fulfilled, (state, action) => {
+        state.reviews = action.payload.sort((a, b) => {
           if (a.date < b.date) {
             return 1;
           }
           return -1;
         }).slice(0, 10);
-        state.offer.isLoading = false;
-      })
-
-      .addCase(fetchCurrentOffersAction.rejected, () => {
-        // Проверить прb неправльном вводе оффер АйДи
-        redirect(AppRoute.Main);
-      })
-    // sendReviewAction.pending/rejected??????????????
-      .addCase(sendReviewAction.fulfilled, (state, action) => {
-        state.reviews = action.payload;
       });
-
-    // .addCase(setError, (state, action) => {
-    //   state.error = action.payload;
-    // });
   },
 });
 
-export const { changeCity,selectCard, setSorting } = dataLoading.actions;
+export const { setError, changeCity,selectCard, setSorting } = dataLoading.actions;
